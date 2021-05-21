@@ -1,11 +1,15 @@
+// Documentation on defining a Fastify JSONSchema
+// https://www.fastify.io/docs/v2.2.x/Validation-and-Serialization/
+
 const bodySchema = {
   type: "object",
-  required: ["id", "class", "definition"],
+  required: ["studentId", "id", "topic", "definition"],
   properties: {
+    studentId: { type: "string" },
     id: { type: "string" },
     title: { type: "string" },
     stimulus: { type: "string" },
-    class: {
+    topic: {
       type: "string",
       enum: ["gradeBasicAlgebra", "gradeBasicCalculus"],
     },
@@ -14,6 +18,13 @@ const bodySchema = {
   },
 };
 
+const queryStringSchema = {};
+const paramsSchema = {};
+const headersSchema = {};
+
 module.exports = {
-  bodySchema,
+  body: bodySchema,
+  querystring: queryStringSchema,
+  params: paramsSchema,
+  headers: headersSchema,
 };
