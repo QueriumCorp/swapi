@@ -14,7 +14,6 @@ module.exports = async function (fastify, opts) {
 
       const qEvalServer = process.env.SWSERVER;
 
-      console.info(hints);
       // qs1 = typeof qs1 === "undefined" ? "" : qs1;
       // qs2 = typeof qs2 === "undefined" ? "" : qs2;
       // qs3 = typeof qs3 === "undefined" ? "" : qs3;
