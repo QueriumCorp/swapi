@@ -4,9 +4,9 @@
 
 const bodySchema = {
   type: "object",
-  required: ["orgId", "studentId", "id", "topic", "definition"],
+  required: ["appKey", "studentId", "id", "topic", "definition"],
   properties: {
-    orgId: { type: "string" },
+    appKey: { type: "string" },
     studentId: { type: "string" },
     id: { type: "string" },
     title: { type: "string" },
