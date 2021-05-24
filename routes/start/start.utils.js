@@ -17,11 +17,10 @@ const create_WebMMA_url = function (request) {
 
   const appKeyPart = "?appKey=" + appKey;
   const cmdPart = "&cmd=initializeSession";
-  const sessionCodePart =
-    "&session=" + prepSessionCode(id, appKey, studentId, definition);
+  const sessionCodePart = "&session=" + prepSessionCode(id, studentId);
   const classCodePart = "&class=" + encodeURIComponent(topic);
   const questionPart = "&question=" + prepQuestionDef(definition);
-  const policyPart = "&policies=" + prepQueryString(policy);
+  const policyPart = "&policies=" + "$A1$";
   const hint1Part = "&qs1=" + prepQueryString(hints[0]);
   const hint2Part = "&qs2=" + prepQueryString(hints[1]);
   const hint3Part = "&qs3=" + prepQueryString(hints[2]);
@@ -37,12 +36,21 @@ const create_WebMMA_url = function (request) {
     hint2Part,
     hint3Part,
   ];
+  console.info("---");
 
+  console.info("EXPECTED");
+  console.info(
+    "https://stepwise.querium.com/webMathematica/api/?appKey=JiraTestPage&cmd=initializeSession&session=QUES6018%24GaryBusey%2424052021161444&class=gradeBasicAlgebra&question=SolveFor[%205x%252b9y=16%20%2526%2526%20x%252b2y=4,%20%7Bx,y%7D,%20SubstOrElimMethod]&policies=$A1$&qs1=undefined&qs2=undefined&qs3=undefined"
+  );
+  console.info("ACTUAL");
+  console.info(process.env.SWSERVER + urlParts.join(""));
+  console.info("---");
   return process.env.SWSERVER + urlParts.join("");
 };
 
 // clean up webMMA response data
 const cleanResponse = function (result) {
+  // console.info("result: ", result);
   // grab everything inside the <result> element
   var resultStart = result.indexOf("<result>") + 8;
   var resultEnd = result.indexOf("</result>") - 8;
@@ -59,30 +67,24 @@ const getMathML = function (result) {
 
 // discovers the identifiers (variables) in the problem
 const getIdentifiers = function (list) {
-  const qEvalStyle = list.match(/List\[/g)?.length ?? 0;
   let listStart, listEnd;
   let identifiers = [];
+  console.info("list", list);
+  // new style with special operators
+  // operators list
+  const fourthListToken = list.lastIndexOf("List[");
+  console.log("fourthListToken", fourthListToken);
+  // identifiers list
+  const thirdListToken = list.lastIndexOf("List[", fourthListToken - 1);
+  console.log("thirdListToken", thirdListToken);
 
-  if (qEvalStyle === 2) {
-    // pre-July
-    listStart = list.lastIndexOf("List[") + 5;
-    listEnd = list.indexOf("]", listStart);
-    list = list.slice(listStart, listEnd);
+  listStart = thirdListToken + 5;
+  listEnd = list.lastIndexOf("]", fourthListToken);
+  list = list.slice(listStart, listEnd);
+  if (list.length) {
     identifiers = list.split(",");
   } else {
-    // new style with special operators
-    // operators list
-    const fourthListToken = list.lastIndexOf("List[");
-    // identifiers list
-    const thirdListToken = list.lastIndexOf("List[", fourthListToken - 1);
-    listStart = thirdListToken + 5;
-    listEnd = list.lastIndexOf("]", fourthListToken);
-    list = list.slice(listStart, listEnd);
-    if (list.length) {
-      identifiers = list.split(",");
-    } else {
-      identifiers = [];
-    }
+    identifiers = [];
   }
 
   // cleanup resulting strings
@@ -276,17 +278,60 @@ const prepQueryString = function (str) {
 };
 
 const prepQuestionDef = function (str) {
+  return str
+    .replace(/\+/g, "%252b")
+    .replace(/\&/g, "%2526")
+    .replace(/\^/g, "%255e")
+    .replace(/\s/g, "%20")
+    .replace(/{/g, "%7B")
+    .replace(/}/g, "%7D")
+    .replace(/\|/g, "%7C");
+};
+
+const prepSessionCode = function (id, studentId) {
   return encodeURIComponent(
-    str
-      .replace(/\+/g, "%252b")
-      .replace(/\&/g, "%2526")
-      .replace(/\^/g, "%255e")
-      .replace(/{/g, "%7b")
-      .replace(/}/g, "%7d")
-      .replace(/\|/g, "%7c")
+    id.replace(/[^0-9a-z]/gi, "") +
+      "$" +
+      studentId.replace(/[^a-zA-Z0-9]/g, "") +
+      "$" +
+      dateStamp()
   );
 };
 
-const prepSessionCode = function (id, appKey, studentId, definition) {
-  return encodeURIComponent(id ? id : appKey + studentId + definition);
+// generates a date stamp string for qEval internal logging
+// TODO: JVR - This can be replaced with built-in functionality
+const dateStamp = function () {
+  // get timestamp
+  var d = new Date();
+
+  // create datestamp for qEval logging
+  var curr_date = d.getDate();
+  curr_date = curr_date + "";
+  if (curr_date.length == 1) {
+    curr_date = "0" + curr_date;
+  }
+  var curr_month = d.getMonth() + 1;
+  curr_month = curr_month + "";
+  if (curr_month.length == 1) {
+    curr_month = "0" + curr_month;
+  }
+  var curr_year = d.getFullYear();
+  var curr_hour = d.getHours();
+  curr_hour = curr_hour + "";
+  if (curr_hour.length == 1) {
+    curr_hour = "0" + curr_hour;
+  }
+  var curr_min = d.getMinutes();
+  curr_min = curr_min + "";
+  if (curr_min.length == 1) {
+    curr_min = "0" + curr_min;
+  }
+  var curr_sec = d.getSeconds();
+  curr_sec = curr_sec + "";
+  if (curr_sec.length == 1) {
+    curr_sec = "0" + curr_sec;
+  }
+  return (
+    "" + curr_date + curr_month + curr_year + curr_hour + curr_min + curr_sec
+  );
 };

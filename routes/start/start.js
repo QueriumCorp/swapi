@@ -19,18 +19,16 @@ module.exports = async function (fastify, opts) {
       let data = await response.text();
       const result = cleanResponse(data);
 
-      // get the mathML
+      // get the mathML, identifiers and operators
       const mathML = getMathML(result);
-
-      // get identifiers and operators
       const ids = getIdentifiers(result);
       const ops = getOperators(result);
 
       const payload = {
         status: 200,
         mathML: mathML,
-        // identifiers: ids,
-        // operators: ops,
+        identifiers: ids,
+        operators: ops,
       };
       console.info("payload:", payload);
 
