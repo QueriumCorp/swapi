@@ -28,6 +28,9 @@ const responseSchema = {
     type: "object",
     properties: {
       status: { type: "string" },
+      mathML: { type: "string" },
+      identifiers: { type: "array", items: { type: "string" } },
+      operators: { type: "array", items: { type: "string" } },
       timestamp: { type: "string" },
     },
   },
