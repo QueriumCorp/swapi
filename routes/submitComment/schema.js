@@ -44,7 +44,10 @@ const responseSchema = {
 };
 
 module.exports = {
-  tags: ["Submit Step"],
+  tags: ["Submit Comment"],
+  summary: "Submit a comment to the AI engineers.",
+  description:
+    "If there is an issue with the way the StepWise AI interprets a step, the hints it provides, or how the math is handled, a comment can be submitted with this route.  The context for the session will be saved along with the comment and the AI engineers will be alerted.",
   body: bodySchema,
   querystring: queryStringSchema,
   params: paramsSchema,

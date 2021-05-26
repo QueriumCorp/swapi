@@ -9,14 +9,7 @@ const bodySchema = {
     appKey: { type: "string" },
     studentId: { type: "string" },
     id: { type: "string" },
-    title: { type: "string" },
-    stimulus: { type: "string" },
-    topic: {
-      type: "string",
-      enum: ["gradeBasicAlgebra", "gradeBasicCalculus"],
-    },
-    definition: { type: "string", minLength: 5 },
-    hints: { type: "array", maxItems: 3, items: { type: "string" } },
+    step: { type: "string" },
   },
 };
 
@@ -28,9 +21,8 @@ const responseSchema = {
     type: "object",
     properties: {
       status: { type: "string" },
-      mathML: { type: "string" },
-      identifiers: { type: "array", items: { type: "string" } },
-      operators: { type: "array", items: { type: "string" } },
+      text: { type: "string" },
+      response: { type: "object" },
     },
   },
   500: {

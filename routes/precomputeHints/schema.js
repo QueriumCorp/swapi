@@ -44,7 +44,7 @@ const responseSchema = {
 };
 
 module.exports = {
-  tags: ["Submit Step"],
+  tags: ["Precompute Hints"],
   body: bodySchema,
   querystring: queryStringSchema,
   params: paramsSchema,
