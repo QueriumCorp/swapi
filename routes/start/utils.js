@@ -1,23 +1,13 @@
 const he = require("he");
 
-const create_WebMMA_url = function (request) {
+const createQueryString = function (sessionCode, request) {
   // Warning: qEval does case-sensitive replacement of percent escapes,
   // and expects lower case letters e.g. %2b NOT %2B
-  const {
-    appKey,
-    studentId,
-    id,
-    title,
-    stimulus,
-    topic,
-    definition,
-    policy,
-    hints,
-  } = request.body;
+  const { appKey, topic, definition, hints } = request.body;
 
   const appKeyPart = "?appKey=" + appKey.replace(/\s/g, "");
   const cmdPart = "&cmd=initializeSession";
-  const sessionCodePart = "&session=" + prepSessionCode(id, studentId);
+  const sessionCodePart = "&session=" + sessionCode;
   const classCodePart = "&class=" + encodeURIComponent(topic);
   const questionPart = "&question=" + prepQuestionDef(definition);
   const policyPart = "&policies=" + "$A1$";
@@ -248,7 +238,7 @@ const getOperators = function (list) {
 };
 
 module.exports = {
-  create_WebMMA_url,
+  createQueryString,
   cleanResponse,
   getMathML,
   getIdentifiers,

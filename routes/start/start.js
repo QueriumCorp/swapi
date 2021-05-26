@@ -6,7 +6,7 @@ const {
   getMathML,
   getIdentifiers,
   getOperators,
-  create_WebMMA_url,
+  createQueryString,
 } = require("./utils");
 
 module.exports = async function (fastify, opts) {
@@ -23,9 +23,14 @@ module.exports = async function (fastify, opts) {
         return error;
       }
 
+      // Create the sessionCode for this session
+      const { studentId, id } = request.body;
+      const sessionCode = await fastify.createSessionCode(id, studentId);
+
       // Create & Fetch
       const serverURL = await fastify.getServerURL();
-      const queryString = await create_WebMMA_url(request);
+
+      const queryString = await createQueryString(sessionCode, request);
       const fullURL = serverURL + queryString;
       let response = await fetch(fullURL);
 
@@ -48,6 +53,7 @@ module.exports = async function (fastify, opts) {
 
       return {
         status: 200,
+        sessionCode: sessionCode,
         mathML: mathML,
         identifiers: ids,
         operators: ops,

@@ -1,6 +1,6 @@
 const he = require("he");
 
-const create_WebMMA_url = function (request) {
+const createQueryString = function (request) {
   // Warning: qEval does case-sensitive replacement of percent escapes,
   // and expects lower case letters e.g. %2b NOT %2B
   const {
@@ -248,7 +248,7 @@ const getOperators = function (list) {
 };
 
 module.exports = {
-  create_WebMMA_url,
+  createQueryString,
   cleanResponse,
   getMathML,
   getIdentifiers,

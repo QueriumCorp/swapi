@@ -6,7 +6,7 @@ const {
   getMathML,
   getIdentifiers,
   getOperators,
-  create_WebMMA_url,
+  createQueryString,
 } = require("./utils");
 
 module.exports = async function (fastify, opts) {
@@ -25,7 +25,7 @@ module.exports = async function (fastify, opts) {
 
       // Create & Fetch
       const serverURL = await fastify.getServerURL();
-      const queryString = await create_WebMMA_url(request);
+      const queryString = await createQueryString(request);
       const fullURL = serverURL + queryString;
       let response = await fetch(fullURL);
 
