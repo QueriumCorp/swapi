@@ -31,7 +31,14 @@ const responseSchema = {
       mathML: { type: "string" },
       identifiers: { type: "array", items: { type: "string" } },
       operators: { type: "array", items: { type: "string" } },
-      timestamp: { type: "string" },
+    },
+  },
+  500: {
+    type: "object",
+    properties: {
+      statusCode: { type: "string" },
+      error: { type: "string" },
+      message: { type: "string" },
     },
   },
 };

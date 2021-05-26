@@ -15,7 +15,7 @@ const create_WebMMA_url = function (request) {
     hints,
   } = request.body;
 
-  const appKeyPart = "?appKey=" + appKey;
+  const appKeyPart = "?appKey=" + appKey.replace(/\s/g, "");
   const cmdPart = "&cmd=initializeSession";
   const sessionCodePart = "&session=" + prepSessionCode(id, studentId);
   const classCodePart = "&class=" + encodeURIComponent(topic);
@@ -36,16 +36,8 @@ const create_WebMMA_url = function (request) {
     hint2Part,
     hint3Part,
   ];
-  console.info("---");
 
-  console.info("EXPECTED");
-  console.info(
-    "https://stepwise.querium.com/webMathematica/api/?appKey=JiraTestPage&cmd=initializeSession&session=QUES6018%24GaryBusey%2424052021161444&class=gradeBasicAlgebra&question=SolveFor[%205x%252b9y=16%20%2526%2526%20x%252b2y=4,%20%7Bx,y%7D,%20SubstOrElimMethod]&policies=$A1$&qs1=undefined&qs2=undefined&qs3=undefined"
-  );
-  console.info("ACTUAL");
-  console.info(process.env.SWSERVER + urlParts.join(""));
-  console.info("---");
-  return process.env.SWSERVER + urlParts.join("");
+  return urlParts.join("");
 };
 
 // clean up webMMA response data
@@ -69,14 +61,12 @@ const getMathML = function (result) {
 const getIdentifiers = function (list) {
   let listStart, listEnd;
   let identifiers = [];
-  console.info("list", list);
-  // new style with special operators
+
   // operators list
   const fourthListToken = list.lastIndexOf("List[");
-  console.log("fourthListToken", fourthListToken);
+
   // identifiers list
   const thirdListToken = list.lastIndexOf("List[", fourthListToken - 1);
-  console.log("thirdListToken", thirdListToken);
 
   listStart = thirdListToken + 5;
   listEnd = list.lastIndexOf("]", fourthListToken);

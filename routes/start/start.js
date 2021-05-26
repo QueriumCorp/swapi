@@ -1,5 +1,6 @@
 "use strict";
 const fetch = require("node-fetch");
+const validAppKey = require("../../plugins/validAppKey");
 const schema = require("./start.schema");
 const {
   cleanResponse,
@@ -15,29 +16,43 @@ module.exports = async function (fastify, opts) {
     url: "/",
     schema: schema,
     handler: async (request, reply) => {
-      let response = await fetch(create_WebMMA_url(request));
+      // See if appkey is approved
+      if (!(await fastify.validAppKey(request.body.appKey))) {
+        const error = new Error("Access to StepWise is forbidden.");
+        error.status = 403;
+        error.statusText = "Forbidden";
+        return error;
+      }
+
+      // Create & Fetch
+      const serverURL = await fastify.getServerURL();
+      const queryString = await create_WebMMA_url(request);
+      const fullURL = serverURL + queryString;
+      let response = await fetch(fullURL);
+
+      // Check for a bad response from qEval
+      if (response.status !== 200) {
+        const error = new Error("There was an error in the StepWise Server");
+        error.status = response.status;
+        error.statusText = response.statusText;
+        return error;
+      }
+
+      // Sanitize the response for our protection
       let data = await response.text();
       const result = cleanResponse(data);
 
-      // get the mathML, identifiers and operators
+      // Get the mathML, identifiers and operators
       const mathML = getMathML(result);
       const ids = getIdentifiers(result);
       const ops = getOperators(result);
 
-      const payload = {
+      return {
         status: 200,
         mathML: mathML,
         identifiers: ids,
         operators: ops,
       };
-      console.info("payload:", payload);
-
-      return payload;
-      // })
-      // .catch((err) => {
-      //   console.error(err);
-      //   reply.status(500).send(err);
-      // });
     },
   });
 };
