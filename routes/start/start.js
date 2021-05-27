@@ -2,7 +2,6 @@
 const fetch = require("node-fetch");
 const schema = require("./schema");
 const {
-  cleanResponse,
   getMathML,
   getIdentifiers,
   getOperators,
@@ -44,7 +43,7 @@ module.exports = async function (fastify, opts) {
 
       // Sanitize the response for our protection
       let data = await response.text();
-      const result = cleanResponse(data);
+      const result = fastify.cleanResponse(data);
 
       // Get the mathML, identifiers and operators
       const mathML = getMathML(result);
