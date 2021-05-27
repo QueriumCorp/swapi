@@ -1,13 +1,7 @@
 "use strict";
 const fetch = require("node-fetch");
 const schema = require("./schema");
-const {
-  cleanResponse,
-  getMathML,
-  getIdentifiers,
-  getOperators,
-  createQueryString,
-} = require("./utils");
+const { createQueryString, parseResponse } = require("./utils");
 
 module.exports = async function (fastify, opts) {
   fastify.route({
@@ -27,6 +21,7 @@ module.exports = async function (fastify, opts) {
       const serverURL = await fastify.getServerURL();
       const queryString = await createQueryString(request);
       const fullURL = serverURL + queryString;
+      console.info(fullURL);
       let response = await fetch(fullURL);
 
       // Check for a bad response from qEval
@@ -39,18 +34,14 @@ module.exports = async function (fastify, opts) {
 
       // Sanitize the response for our protection
       let data = await response.text();
-      const result = cleanResponse(data);
-
-      // Get the mathML, identifiers and operators
-      const mathML = getMathML(result);
-      const ids = getIdentifiers(result);
-      const ops = getOperators(result);
+      const cleansed = fastify.cleanResponse(data);
+      const result = parseResponse(cleansed);
 
       return {
         status: 200,
-        mathML: mathML,
-        identifiers: ids,
-        operators: ops,
+        stepStatus: result.stepStatus,
+        message: result.message,
+        rawResponse: data,
       };
     },
   });

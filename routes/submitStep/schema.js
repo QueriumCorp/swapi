@@ -4,9 +4,10 @@
 
 const bodySchema = {
   type: "object",
-  required: ["appKey", "studentId", "id", "topic", "definition"],
+  required: ["appKey", "sessionCode", "studentId", "id", "step"],
   properties: {
     appKey: { type: "string" },
+    sessionCode: { type: "string" },
     studentId: { type: "string" },
     id: { type: "string" },
     step: { type: "string" },
@@ -21,8 +22,12 @@ const responseSchema = {
     type: "object",
     properties: {
       status: { type: "string" },
-      text: { type: "string" },
-      response: { type: "object" },
+      stepStatus: {
+        type: "string",
+        enum: ["VALID", "INVALID", "COMPLETE", "EXPIRED", "ERROR"],
+      },
+      message: { type: "string" },
+      rawResponse: { type: "string" },
     },
   },
   500: {
