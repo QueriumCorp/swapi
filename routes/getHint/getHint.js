@@ -23,7 +23,6 @@ module.exports = async function (fastify, opts) {
       const fullURL = serverURL + queryString;
       let response = await fetch(fullURL);
 
-      console.log(response);
       // Check for a bad response from qEval
       if (response.status !== 200) {
         const error = new Error("There was an error in the StepWise Server");
@@ -34,8 +33,28 @@ module.exports = async function (fastify, opts) {
         return error;
       }
 
-      // Sanitize the response for our protection
       let data = await response.text();
+
+      // Check for ghost hints
+      if (data.search(/ghost hint/i) === -1) {
+        response = await fetch(fullURL);
+
+        // Check for a bad response from qEval
+        if (response.status !== 200) {
+          const ghostError = new Error(
+            "There was an error in the StepWise Server"
+          );
+          ghostError.statusCode = response.status;
+          ghostError.error = "There was an error in the StepWise Server";
+          ghostError.message = response.statusText;
+          ghostError.details = queryString;
+          return ghostError;
+        }
+
+        data = await response.text();
+      }
+
+      // Sanitize the response for our protection
       const cleansed = fastify.cleanResponse(data);
       const result = parseResponse(cleansed);
 
