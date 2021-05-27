@@ -27,8 +27,10 @@ module.exports = async function (fastify, opts) {
       // Check for a bad response from qEval
       if (response.status !== 200) {
         const error = new Error("There was an error in the StepWise Server");
-        error.status = response.status;
-        error.statusText = response.statusText;
+        error.statusCode = response.status;
+        error.error = "There was an error in the StepWise Server";
+        error.message = response.statusText;
+        error.details = queryString;
         return error;
       }
 

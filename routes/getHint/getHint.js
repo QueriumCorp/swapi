@@ -1,13 +1,7 @@
 "use strict";
 const fetch = require("node-fetch");
 const schema = require("./schema");
-const {
-  cleanResponse,
-  getMathML,
-  getIdentifiers,
-  getOperators,
-  createQueryString,
-} = require("./utils");
+const { createQueryString, parseResponse } = require("./utils");
 
 module.exports = async function (fastify, opts) {
   fastify.route({
@@ -29,28 +23,34 @@ module.exports = async function (fastify, opts) {
       const fullURL = serverURL + queryString;
       let response = await fetch(fullURL);
 
+      console.log(response);
       // Check for a bad response from qEval
       if (response.status !== 200) {
         const error = new Error("There was an error in the StepWise Server");
-        error.status = response.status;
-        error.statusText = response.statusText;
+        error.statusCode = response.status;
+        error.error = "There was an error in the StepWise Server";
+        error.message = response.statusText;
+        error.details = queryString;
         return error;
       }
 
       // Sanitize the response for our protection
       let data = await response.text();
-      const result = cleanResponse(data);
+      const cleansed = fastify.cleanResponse(data);
+      const result = parseResponse(cleansed);
 
-      // Get the mathML, identifiers and operators
-      const mathML = getMathML(result);
-      const ids = getIdentifiers(result);
-      const ops = getOperators(result);
-
+      // Check for a bad response from qEval
+      if (!result.success) {
+        const error = new Error("There was an error in the StepWise Server");
+        error.statusCode = response.status;
+        error.message =
+          "The getHint command failed.There was an error in the StepWise Server";
+        error.details = queryString;
+        return error;
+      }
       return {
         status: 200,
-        mathML: mathML,
-        identifiers: ids,
-        operators: ops,
+        hintText: result.hintText,
       };
     },
   });

@@ -36,6 +36,7 @@ const responseSchema = {
       statusCode: { type: "string" },
       error: { type: "string" },
       message: { type: "string" },
+      details: { type: "string" },
     },
   },
 };
