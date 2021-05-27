@@ -47,8 +47,6 @@ module.exports = async function (fastify, opts) {
         return error;
       }
 
-      console.info("result.instructions", result.instructions);
-
       return {
         status: 200,
         showMe: result.instructions,
