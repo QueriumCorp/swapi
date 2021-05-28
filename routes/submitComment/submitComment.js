@@ -1,13 +1,7 @@
 "use strict";
 const fetch = require("node-fetch");
 const schema = require("./schema");
-const {
-  cleanResponse,
-  getMathML,
-  getIdentifiers,
-  getOperators,
-  createQueryString,
-} = require("./utils");
+const { createQueryString, parseResponse } = require("./utils");
 
 module.exports = async function (fastify, opts) {
   fastify.route({
@@ -32,25 +26,32 @@ module.exports = async function (fastify, opts) {
       // Check for a bad response from qEval
       if (response.status !== 200) {
         const error = new Error("There was an error in the StepWise Server");
-        error.status = response.status;
-        error.statusText = response.statusText;
+        error.statusCode = response.status;
+        error.error = "There was an error in the StepWise Server";
+        error.message = response.statusText;
+        error.details = queryString;
         return error;
       }
 
       // Sanitize the response for our protection
       let data = await response.text();
-      const result = cleanResponse(data);
+      const cleansed = fastify.cleanResponse(data);
+      const result = parseResponse(cleansed);
 
-      // Get the mathML, identifiers and operators
-      const mathML = getMathML(result);
-      const ids = getIdentifiers(result);
-      const ops = getOperators(result);
+      // Check for bad data from qEval
+      if (!result.success) {
+        const error = new Error("There was an error in the StepWise Server");
+        error.statusCode = 500;
+        error.error = "submitComment returned an unexpected response.";
+        error.message =
+          "This error should not have occurred. Please contact support.";
+        error.details = queryString;
+        return error;
+      }
 
       return {
         status: 200,
-        mathML: mathML,
-        identifiers: ids,
-        operators: ops,
+        rawResponse: data,
       };
     },
   });

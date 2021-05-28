@@ -21,14 +21,13 @@ module.exports = async function (fastify, opts) {
       const serverURL = await fastify.getServerURL();
       const queryString = await createQueryString(request);
       const fullURL = serverURL + queryString;
-      console.info(fullURL);
       let response = await fetch(fullURL);
 
       // Check for a bad response from qEval
       if (response.status !== 200) {
         const error = new Error("There was an error in the StepWise Server");
         error.statusCode = response.status;
-        error.error = "There was an error in the StepWise Server";
+        error.error = "The getGrade command failed.";
         error.message = response.statusText;
         error.details = queryString;
         return error;
