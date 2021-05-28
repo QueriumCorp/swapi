@@ -37,18 +37,21 @@ module.exports = async function (fastify, opts) {
       let data = await response.text();
       const cleansed = fastify.cleanResponse(data);
       const result = parseResponse(cleansed);
-      // Check for a bad response from qEval
+
+      // Check for bad data from qEval
       if (!result.success) {
         const error = new Error("There was an error in the StepWise Server");
-        error.statusCode = response.status;
+        error.statusCode = 500;
+        error.error = "close returned an unexpected response.";
         error.message =
-          "The close command failed.There was an error in the StepWise Server";
+          "This error should not have occurred. Please contact support.";
         error.details = queryString;
         return error;
       }
 
       return {
         status: 200,
+        rawResponse: data,
       };
     },
   });
