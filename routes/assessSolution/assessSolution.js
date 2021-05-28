@@ -23,35 +23,40 @@ module.exports = async function (fastify, opts) {
         return error;
       }
 
-      // Create & Fetch
-      const serverURL = await fastify.getServerURL();
-      const queryString = await createQueryString(request);
-      const fullURL = serverURL + queryString;
-      let response = await fetch(fullURL);
+      const unImpError = new Error("Assess Solution is not available.");
+      unImpError.status = 403;
+      unImpError.statusText = "Unimplemented";
+      return unImpError;
 
-      // Check for a bad response from qEval
-      if (response.status !== 200) {
-        const error = new Error("There was an error in the StepWise Server");
-        error.status = response.status;
-        error.statusText = response.statusText;
-        return error;
-      }
+      // // Create & Fetch
+      // const serverURL = await fastify.getServerURL();
+      // const queryString = await createQueryString(request);
+      // const fullURL = serverURL + queryString;
+      // let response = await fetch(fullURL);
 
-      // Sanitize the response for our protection
-      let data = await response.text();
-      const result = cleanResponse(data);
+      // // Check for a bad response from qEval
+      // if (response.status !== 200) {
+      //   const error = new Error("There was an error in the StepWise Server");
+      //   error.status = response.status;
+      //   error.statusText = response.statusText;
+      //   return error;
+      // }
 
-      // Get the mathML, identifiers and operators
-      const mathML = getMathML(result);
-      const ids = getIdentifiers(result);
-      const ops = getOperators(result);
+      // // Sanitize the response for our protection
+      // let data = await response.text();
+      // const result = cleanResponse(data);
 
-      return {
-        status: 200,
-        mathML: mathML,
-        identifiers: ids,
-        operators: ops,
-      };
+      // // Get the mathML, identifiers and operators
+      // const mathML = getMathML(result);
+      // const ids = getIdentifiers(result);
+      // const ops = getOperators(result);
+
+      // return {
+      //   status: 200,
+      //   mathML: mathML,
+      //   identifiers: ids,
+      //   operators: ops,
+      // };
     },
   });
 };
