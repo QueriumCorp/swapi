@@ -4,19 +4,13 @@
 
 const bodySchema = {
   type: "object",
-  required: ["appKey", "studentId", "id", "topic", "definition"],
+  required: ["appKey", "studentId", "id", "sessionCode", "comment"],
   properties: {
     appKey: { type: "string" },
+    sessionCode: { type: "string" },
     studentId: { type: "string" },
     id: { type: "string" },
-    title: { type: "string" },
-    stimulus: { type: "string" },
-    topic: {
-      type: "string",
-      enum: ["gradeBasicAlgebra", "gradeBasicCalculus"],
-    },
-    definition: { type: "string", minLength: 5 },
-    hints: { type: "array", maxItems: 3, items: { type: "string" } },
+    comment: { type: "string" },
   },
 };
 
@@ -28,9 +22,7 @@ const responseSchema = {
     type: "object",
     properties: {
       status: { type: "string" },
-      mathML: { type: "string" },
-      identifiers: { type: "array", items: { type: "string" } },
-      operators: { type: "array", items: { type: "string" } },
+      rawResponse: { type: "string" },
     },
   },
   500: {

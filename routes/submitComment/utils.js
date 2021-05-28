@@ -6,7 +6,7 @@ const createQueryString = function (request) {
   const appKeyPart = "?appKey=" + appKey.replace(/\s/g, "");
   const cmdPart = "&cmd=addComment";
   const sessionCodePart = "&session=" + sessionCode;
-  const commentPart = "&addComment=" + comment;
+  const commentPart = "&comment=" + comment;
 
   return [appKeyPart, cmdPart, sessionCodePart, commentPart].join("");
 };
