@@ -4,7 +4,7 @@
 
 const bodySchema = {
   type: "object",
-  required: ["appKey", "studentId", "id", "sessionCode"],
+  required: ["appKey", "studentId", "id", "sessionCode", "comment"],
   properties: {
     appKey: { type: "string" },
     sessionCode: { type: "string" },
