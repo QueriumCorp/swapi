@@ -15,7 +15,7 @@ module.exports = fp((fastify, opts, next) => {
         url: "http://www.querium.com",
         description: "Find more info here",
       },
-      host: "127.0.0.1:5000",
+      host: "https://stark-castle-59181.herokuapp.com/",
       schemes: ["http"],
       consumes: ["application/json"],
       produces: ["application/json"],
