@@ -1,1 +1,1 @@
-web: fastify start -l info -a 0.0.0.0
+web: fastify start -l info -a 0.0.0.0 app.js
