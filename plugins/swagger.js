@@ -16,7 +16,7 @@ module.exports = fp((fastify, opts, next) => {
         description: "Find more info here",
       },
       host: "stark-castle-59181.herokuapp.com",
-      schemes: ["http"],
+      schemes: ["https", "http"],
       consumes: ["application/json"],
       produces: ["application/json"],
     },
