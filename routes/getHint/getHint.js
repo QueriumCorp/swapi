@@ -36,7 +36,7 @@ module.exports = async function (fastify, opts) {
       let data = await response.text();
 
       // Check for ghost hints
-      if (data.search(/ghost hint/i) === -1) {
+      if (data.search(/ghost hint/i) !== -1) {
         response = await fetch(fullURL);
 
         // Check for a bad response from qEval
