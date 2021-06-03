@@ -1,1 +1,288 @@
-{"client":"Thunder Client","collectionName":"SWAPI","dateExported":"2021-06-03T16:20:42.263Z","version":"1.1","folders":[],"requests":[{"containerId":"","sortNum":10000,"headers":[{"name":"Accept","value":"*/*"},{"name":"User-Agent","value":"Thunder Client (https://www.thunderclient.io)"}],"colId":"97bd6aa3-ba08-4848-9013-5eb501c37359","name":"Heartbeat","url":"{{targetServer}}","method":"GET","modified":"2021-06-03T16:02:44.919Z","created":"2021-05-20T20:47:02.523Z","_id":"36c02fba-e561-468b-a0b3-1cac8d0d87b8","tests":[]},{"containerId":"","sortNum":20000,"headers":[{"name":"Accept","value":"*/*"},{"name":"User-Agent","value":"Thunder Client (https://www.thunderclient.io)"}],"colId":"97bd6aa3-ba08-4848-9013-5eb501c37359","name":"StartSession","url":"{{targetServer}}/start","method":"POST","modified":"2021-06-03T16:16:28.977Z","created":"2021-05-20T22:48:12.652Z","_id":"9caea585-a0f4-47fc-a20f-a1039af5df74","body":{"type":"json","raw":"{\n  \"appKey\": \"StepWiseAPI\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\",\n  \"title\": \"Solve compound linear inequalities in 1 variable\",\n  \"definition\": \"SolveFor[ 5x+9y=16 && x+2y=4, {x,y}, SubstOrElimMethod]\",\n  \"stimulus\": \"Solve by the substitution or elimination method. Give your answer as an ordered pair \\\\(x,y\\\\).\",\n  \"topic\": \"gradeBasicAlgebra\",\n  \"hints\": []\n}"},"tests":[{"type":"set-env-var","custom":"json.sessionCode","action":"setto","value":"{{session}}"}]},{"containerId":"","sortNum":30000,"headers":[{"name":"Accept","value":"*/*"},{"name":"User-Agent","value":"Thunder Client (https://www.thunderclient.io)"}],"colId":"97bd6aa3-ba08-4848-9013-5eb501c37359","name":"SubmitStep LaTeX","url":"{{targetServer}}/submitStep","method":"POST","modified":"2021-06-03T16:19:08.433Z","created":"2021-05-26T20:29:51.969Z","_id":"bd19712d-8d51-486c-9ff8-eb3f462c2b7d","body":{"type":"json","raw":"{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\",\n  \"step\": \"x+2y=4\"\n}"},"tests":[]},{"containerId":"","sortNum":35000,"headers":[{"name":"Accept","value":"*/*"},{"name":"User-Agent","value":"Thunder Client (https://www.thunderclient.io)"}],"colId":"97bd6aa3-ba08-4848-9013-5eb501c37359","name":"GetHint","url":"{{targetServer}}/getHint","method":"POST","modified":"2021-06-03T16:20:00.859Z","created":"2021-05-27T14:25:02.437Z","_id":"0cc97900-1747-46cc-98cc-16fa099a94c3","body":{"type":"json","raw":"{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\"\n}"},"tests":[]},{"containerId":"","sortNum":36250,"headers":[{"name":"Accept","value":"*/*"},{"name":"User-Agent","value":"Thunder Client (https://www.thunderclient.io)"}],"colId":"97bd6aa3-ba08-4848-9013-5eb501c37359","name":"CloseSession","url":"{{targetServer}}/close","method":"POST","modified":"2021-06-03T16:03:27.227Z","created":"2021-05-27T16:49:55.712Z","_id":"a8594f7d-b02c-41fb-ab11-6431084146d9","body":{"type":"json","raw":"{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\"\n}"},"tests":[]},{"containerId":"","sortNum":36562.5,"headers":[{"name":"Accept","value":"*/*"},{"name":"User-Agent","value":"Thunder Client (https://www.thunderclient.io)"}],"colId":"97bd6aa3-ba08-4848-9013-5eb501c37359","name":"submitComment","url":"{{targetServer}}/submitComment","method":"POST","modified":"2021-06-03T16:03:35.507Z","created":"2021-05-28T19:47:11.336Z","_id":"31e8919f-42ce-4b02-8974-0ee8792eb122","body":{"type":"json","raw":"{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\",\n  \"comment\": \"I have insightful criticisms about this question!\"\n}"},"tests":[]},{"containerId":"","sortNum":36718.8,"headers":[{"name":"Accept","value":"*/*"},{"name":"User-Agent","value":"Thunder Client (https://www.thunderclient.io)"}],"colId":"97bd6aa3-ba08-4848-9013-5eb501c37359","name":"saveTrace","url":"{{targetServer}}/saveTrace","method":"POST","modified":"2021-06-03T16:03:45.090Z","created":"2021-05-28T20:03:50.136Z","_id":"0e27d58d-c70d-4da8-916e-6f09c3145ca2","body":{"type":"json","raw":"{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\",\n  \"comment\": \"I have insightful criticisms about this question!\"\n}"},"tests":[]},{"containerId":"","sortNum":36875,"headers":[{"name":"Accept","value":"*/*"},{"name":"User-Agent","value":"Thunder Client (https://www.thunderclient.io)"}],"colId":"97bd6aa3-ba08-4848-9013-5eb501c37359","name":"getGrade","url":"{{targetServer}}/getGrade","method":"POST","modified":"2021-06-03T16:03:52.968Z","created":"2021-05-28T19:15:46.576Z","_id":"882e5ab8-78e5-4700-8f79-2ccdac205f76","body":{"type":"json","raw":"{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\"\n}"},"tests":[]},{"containerId":"","sortNum":37500,"headers":[{"name":"Accept","value":"*/*"},{"name":"User-Agent","value":"Thunder Client (https://www.thunderclient.io)"}],"colId":"97bd6aa3-ba08-4848-9013-5eb501c37359","name":"ShowMe","url":"{{targetServer}}/showMe","method":"POST","modified":"2021-06-03T16:17:25.590Z","created":"2021-05-27T15:17:41.905Z","_id":"9e949c8d-6e65-4f34-8e13-545f9581f805","body":{"type":"json","raw":"{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\"\n}"},"tests":[]},{"containerId":"","sortNum":38125,"headers":[{"name":"Accept","value":"*/*"},{"name":"User-Agent","value":"Thunder Client (https://www.thunderclient.io)"}],"colId":"97bd6aa3-ba08-4848-9013-5eb501c37359","name":"AssessSolution","url":"{{targetServer}}/assessSolution","method":"POST","modified":"2021-06-03T16:04:13.275Z","created":"2021-05-28T18:36:48.253Z","_id":"5e41d130-5500-4a39-bf5f-b3599338f3f3","body":{"type":"json","raw":"{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\"\n}"},"tests":[]},{"containerId":"","sortNum":38750,"headers":[{"name":"Accept","value":"*/*"},{"name":"User-Agent","value":"Thunder Client (https://www.thunderclient.io)"}],"colId":"97bd6aa3-ba08-4848-9013-5eb501c37359","name":"PrecomputeHints","url":"{{targetServer}}/precomputeHints","method":"POST","modified":"2021-06-03T16:04:22.298Z","created":"2021-05-27T17:37:25.518Z","_id":"c501baea-85e1-4584-ab37-5ad3d38a218f","body":{"type":"json","raw":"{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": {{session}},\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\"\n}"},"tests":[]},{"containerId":"","sortNum":40000,"headers":[{"name":"Accept","value":"*/*"},{"name":"User-Agent","value":"Thunder Client (https://www.thunderclient.io)"}],"colId":"97bd6aa3-ba08-4848-9013-5eb501c37359","name":"SubmitStep MathML","url":"{{targetServer}}/submitStep","method":"POST","modified":"2021-06-03T16:04:35.161Z","created":"2021-05-26T22:35:21.558Z","_id":"9610b718-7aeb-45ba-8e7b-5d7013c6e4c7","body":{"type":"json","raw":"{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\",\n  \"step\": \"<math xmlns='http://www.w3.org/1998/Math/MathML' display='block' title='x=4-2y '><mrow><mi>x</mi><mo>=</mo><mn>4</mn><mo>-</mo><mn>2</mn><mi>y</mi></mrow></math>\"\n}"},"tests":[]}]}
+{
+  "client": "Thunder Client",
+  "collectionName": "SWAPI",
+  "dateExported": "2021-06-03T16:20:42.263Z",
+  "version": "1.1",
+  "folders": [],
+  "requests": [
+    {
+      "containerId": "",
+      "sortNum": 10000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "97bd6aa3-ba08-4848-9013-5eb501c37359",
+      "name": "Heartbeat",
+      "url": "{{targetServer}}",
+      "method": "GET",
+      "modified": "2021-06-03T16:02:44.919Z",
+      "created": "2021-05-20T20:47:02.523Z",
+      "_id": "36c02fba-e561-468b-a0b3-1cac8d0d87b8",
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 20000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "97bd6aa3-ba08-4848-9013-5eb501c37359",
+      "name": "StartSession",
+      "url": "{{targetServer}}/start",
+      "method": "POST",
+      "modified": "2021-06-03T16:16:28.977Z",
+      "created": "2021-05-20T22:48:12.652Z",
+      "_id": "9caea585-a0f4-47fc-a20f-a1039af5df74",
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\",\n  \"title\": \"Solve compound linear inequalities in 1 variable\",\n  \"definition\": \"SolveFor[ 5x+9y=16 && x+2y=4, {x,y}, SubstOrElimMethod]\",\n  \"stimulus\": \"Solve by the substitution or elimination method. Give your answer as an ordered pair \\\\(x,y\\\\).\",\n  \"topic\": \"gradeBasicAlgebra\",\n  \"hints\": []\n}"
+      },
+      "tests": [
+        {
+          "type": "set-env-var",
+          "custom": "json.sessionCode",
+          "action": "setto",
+          "value": "{{session}}"
+        }
+      ]
+    },
+    {
+      "containerId": "",
+      "sortNum": 30000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "97bd6aa3-ba08-4848-9013-5eb501c37359",
+      "name": "SubmitStep LaTeX",
+      "url": "{{targetServer}}/submitStep",
+      "method": "POST",
+      "modified": "2021-06-03T16:19:08.433Z",
+      "created": "2021-05-26T20:29:51.969Z",
+      "_id": "bd19712d-8d51-486c-9ff8-eb3f462c2b7d",
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\",\n  \"step\": \"x+2y=4\"\n}"
+      },
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 35000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "97bd6aa3-ba08-4848-9013-5eb501c37359",
+      "name": "GetHint",
+      "url": "{{targetServer}}/getHint",
+      "method": "POST",
+      "modified": "2021-06-03T16:20:00.859Z",
+      "created": "2021-05-27T14:25:02.437Z",
+      "_id": "0cc97900-1747-46cc-98cc-16fa099a94c3",
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\"\n}"
+      },
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 36250,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "97bd6aa3-ba08-4848-9013-5eb501c37359",
+      "name": "CloseSession",
+      "url": "{{targetServer}}/close",
+      "method": "POST",
+      "modified": "2021-06-03T16:03:27.227Z",
+      "created": "2021-05-27T16:49:55.712Z",
+      "_id": "a8594f7d-b02c-41fb-ab11-6431084146d9",
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\"\n}"
+      },
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 36562.5,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "97bd6aa3-ba08-4848-9013-5eb501c37359",
+      "name": "submitComment",
+      "url": "{{targetServer}}/submitComment",
+      "method": "POST",
+      "modified": "2021-06-03T16:03:35.507Z",
+      "created": "2021-05-28T19:47:11.336Z",
+      "_id": "31e8919f-42ce-4b02-8974-0ee8792eb122",
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\",\n  \"comment\": \"I have insightful criticisms about this question!\"\n}"
+      },
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 36718.8,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "97bd6aa3-ba08-4848-9013-5eb501c37359",
+      "name": "saveTrace",
+      "url": "{{targetServer}}/saveTrace",
+      "method": "POST",
+      "modified": "2021-06-03T16:03:45.090Z",
+      "created": "2021-05-28T20:03:50.136Z",
+      "_id": "0e27d58d-c70d-4da8-916e-6f09c3145ca2",
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\",\n  \"comment\": \"I have insightful criticisms about this question!\"\n}"
+      },
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 36875,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "97bd6aa3-ba08-4848-9013-5eb501c37359",
+      "name": "getGrade",
+      "url": "{{targetServer}}/getGrade",
+      "method": "POST",
+      "modified": "2021-06-03T16:03:52.968Z",
+      "created": "2021-05-28T19:15:46.576Z",
+      "_id": "882e5ab8-78e5-4700-8f79-2ccdac205f76",
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\"\n}"
+      },
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 37500,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "97bd6aa3-ba08-4848-9013-5eb501c37359",
+      "name": "ShowMe",
+      "url": "{{targetServer}}/showMe",
+      "method": "POST",
+      "modified": "2021-06-03T16:17:25.590Z",
+      "created": "2021-05-27T15:17:41.905Z",
+      "_id": "9e949c8d-6e65-4f34-8e13-545f9581f805",
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\"\n}"
+      },
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 38125,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "97bd6aa3-ba08-4848-9013-5eb501c37359",
+      "name": "AssessSolution",
+      "url": "{{targetServer}}/assessSolution",
+      "method": "POST",
+      "modified": "2021-06-03T16:04:13.275Z",
+      "created": "2021-05-28T18:36:48.253Z",
+      "_id": "5e41d130-5500-4a39-bf5f-b3599338f3f3",
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\"\n}"
+      },
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 38750,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "97bd6aa3-ba08-4848-9013-5eb501c37359",
+      "name": "PrecomputeHints",
+      "url": "{{targetServer}}/precomputeHints",
+      "method": "POST",
+      "modified": "2021-06-03T16:04:22.298Z",
+      "created": "2021-05-27T17:37:25.518Z",
+      "_id": "c501baea-85e1-4584-ab37-5ad3d38a218f",
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": {{session}},\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\"\n}"
+      },
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 40000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "97bd6aa3-ba08-4848-9013-5eb501c37359",
+      "name": "SubmitStep MathML",
+      "url": "{{targetServer}}/submitStep",
+      "method": "POST",
+      "modified": "2021-06-03T16:04:35.161Z",
+      "created": "2021-05-26T22:35:21.558Z",
+      "_id": "9610b718-7aeb-45ba-8e7b-5d7013c6e4c7",
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\",\n  \"step\": \"<math xmlns='http://www.w3.org/1998/Math/MathML' display='block' title='x=4-2y '><mrow><mi>x</mi><mo>=</mo><mn>4</mn><mo>-</mo><mn>2</mn><mi>y</mi></mrow></math>\"\n}"
+      },
+      "tests": []
+    }
+  ]
+}
