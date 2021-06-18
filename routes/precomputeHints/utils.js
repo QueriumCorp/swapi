@@ -1,7 +1,7 @@
 const he = require("he");
 
-const createQueryString = function (request) {
-  const { appKey, sessionCode } = request.body;
+const createQueryString = function (request, sessionCode) {
+  const { appKey } = request.body;
 
   const appKeyPart = "?appKey=" + appKey.replace(/\s/g, "");
   const cmdPart = "getGeneralHints&preCompute=1";
