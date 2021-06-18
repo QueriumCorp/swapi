@@ -4,12 +4,10 @@
 
 const bodySchema = {
   type: "object",
-  required: ["appKey", "studentId", "id", "sessionCode", "comment"],
+  required: ["appKey", "sessionToken", "comment"],
   properties: {
     appKey: { type: "string" },
-    sessionCode: { type: "string" },
-    studentId: { type: "string" },
-    id: { type: "string" },
+    sessionToken: { type: "string" },
     comment: { type: "string" },
   },
 };
