@@ -1,7 +1,7 @@
-const createQueryString = function (request) {
+const createQueryString = function (request, sessionCode) {
   // Warning: qEval does case-sensitive replacement of percent escapes,
   // and expects lower case letters e.g. %2b NOT %2B
-  const { appKey, sessionCode, step } = request.body;
+  const { appKey, step } = request.body;
 
   const appKeyPart = "?appKey=" + appKey.replace(/\s/g, "");
   const cmdPart = "&cmd=processLRV";
