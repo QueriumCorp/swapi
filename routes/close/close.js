@@ -17,6 +17,10 @@ module.exports = async function (fastify, opts) {
         return error;
       }
 
+      // Decode sessionToken
+      const session = fastify.jwt.decode(request.body.sessionToken);
+      console.info(session);
+
       // Create & Fetch
       const serverURL = await fastify.getServerURL();
       const queryString = await createQueryString(request);

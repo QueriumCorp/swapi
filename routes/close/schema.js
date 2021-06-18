@@ -7,6 +7,7 @@ const bodySchema = {
   required: ["appKey", "sessionCode", "studentId", "id"],
   properties: {
     appKey: { type: "string" },
+    sessionToken: { type: "string" },
     sessionCode: { type: "string" },
     studentId: { type: "string" },
     id: { type: "string" },

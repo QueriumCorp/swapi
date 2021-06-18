@@ -24,7 +24,10 @@ module.exports = async function (fastify, opts) {
 
       // Create the sessionCode for this session
       const { studentId, id } = request.body;
-      const sessionCode = await fastify.createSessionCode(id, studentId);
+      const { sessionCode, sessionToken } = await fastify.prepSessionInfo(
+        id,
+        studentId
+      );
 
       // Create & Fetch
       const serverURL = await fastify.getServerURL();
@@ -52,6 +55,7 @@ module.exports = async function (fastify, opts) {
 
       return {
         status: 200,
+        sessionToken: sessionToken,
         sessionCode: sessionCode,
         mathML: mathML,
         identifiers: ids,
