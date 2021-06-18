@@ -8,7 +8,7 @@ module.exports = fp((fastify, opts, next) => {
       info: {
         title: "Querium StepWise API",
         description:
-          "This is the API for Querium's AI-based StepWise virtual tutor",
+          "#Intro This is the API for Querium's AI-based StepWise virtual tutor",
         version: "0.1.0",
       },
       externalDocs: {
