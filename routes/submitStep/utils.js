@@ -53,7 +53,7 @@ function parseResponse(response) {
     str =
       "Critical Error: qEval returned an unexpected response - " +
       response.data;
-    status = 10;
+    status = "ERROR";
   }
 
   return {
