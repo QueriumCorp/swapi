@@ -7,6 +7,7 @@
     "test": "test"
   },
   "dependencies": {
+    "close-with-grace": "^1.1.0",
     "fastify": "^3.0.0",
     "fastify-autoload": "^3.3.1",
     "fastify-cli": "^2.12.0",
@@ -24,6 +25,7 @@
     "test": "tap \"test/**/*.test.js\"",
     "start": "fastify start -l info app.js",
     "dev": "fastify start -w -l info -P app.js",
+    "prod": "node server.js",
     "heroku": "git push heroku master"
   },
   "keywords": [],
