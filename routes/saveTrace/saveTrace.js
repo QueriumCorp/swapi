@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 const schema = require("./schema");
 const { createQueryString, parseResponse } = require("./utils");
 
-module.exports = async function (fastify, opts) {
+module.exports = async function(fastify, opts) {
   fastify.route({
     method: "POST",
     url: "/",
@@ -21,9 +21,17 @@ module.exports = async function (fastify, opts) {
       const sessionCode = fastify.createSessionCode(request.body.sessionToken);
 
       // Create & Fetch
-      const serverURL = await fastify.getServerURL();
+      const serverInfo = await fastify.convertNameToUrl(
+        request.body.sessionToken
+      );
+      if (!serverInfo.status) {
+        const error = new Error(serverInfo.msg);
+        error.status = 404;
+        error.statusText = "Not Found";
+        return error;
+      }
       const queryString = await createQueryString(request, sessionCode);
-      const fullURL = serverURL + queryString;
+      const fullURL = serverInfo.url + queryString;
       let response = await fetch(fullURL);
 
       // Check for a bad response from qEval
@@ -54,8 +62,8 @@ module.exports = async function (fastify, opts) {
 
       return {
         status: 200,
-        rawResponse: data,
+        rawResponse: data
       };
-    },
+    }
   });
 };
