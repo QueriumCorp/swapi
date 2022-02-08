@@ -2,8 +2,8 @@
 
 const fp = require("fastify-plugin");
 
-module.exports = fp(async function (fastify, opts) {
-  fastify.decorate("prepSessionInfo", function (id, studentId) {
+module.exports = fp(async function(fastify, opts) {
+  fastify.decorate("prepSessionInfo", function(id, studentId, aiName) {
     const rightNow = Date.now();
     return {
       sessionCode: encodeURIComponent(
@@ -16,8 +16,9 @@ module.exports = fp(async function (fastify, opts) {
       sessionToken: fastify.jwt.sign({
         id,
         studentId,
-        startedAt: rightNow,
-      }),
+        aiName,
+        startedAt: rightNow
+      })
     };
   });
 });
