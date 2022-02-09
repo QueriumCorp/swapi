@@ -9,24 +9,24 @@ module.exports = fp((fastify, opts, next) => {
         title: "Querium StepWise API",
         description:
           "#Intro This is the API for Querium's AI-based StepWise virtual tutor",
-        version: "0.1.0",
+        version: "0.1.0"
       },
       externalDocs: {
         url: "http://www.querium.com",
-        description: "Find more info here",
+        description: "Find more info here"
       },
-      host: "stark-castle-59181.herokuapp.com",
+      host: "qq-stepwise-api.querium.com",
       schemes: ["https", "http"],
       consumes: ["application/json"],
-      produces: ["application/json"],
+      produces: ["application/json"]
     },
     uiConfig: {
       docExpansion: "full",
-      deepLinking: false,
+      deepLinking: false
     },
     staticCSP: true,
-    transformStaticCSP: (header) => header,
-    exposeRoute: true,
+    transformStaticCSP: header => header,
+    exposeRoute: true
   });
 
   next();
