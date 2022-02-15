@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 const schema = require("./schema");
 const { createQueryString, parseResponse } = require("./utils");
 
-module.exports = async function (fastify, opts) {
+module.exports = async function(fastify, opts) {
   fastify.route({
     method: "POST",
     url: "/",
@@ -66,14 +66,14 @@ module.exports = async function (fastify, opts) {
         const error = new Error("There was an error in the StepWise Server");
         error.statusCode = response.status;
         error.message =
-          "The getHint command failed.There was an error in the StepWise Server";
+          "The getHint command failed. There was an error in the StepWise Server";
         error.details = queryString;
         return error;
       }
       return {
         status: 200,
-        hintText: result.hintText,
+        hintText: result.hintText
       };
-    },
+    }
   });
 };
