@@ -29,12 +29,21 @@ module.exports = async function(fastify, opts) {
       const sessionCode = fastify.createSessionCode(request.body.sessionToken);
 
       // Create & Fetch
-      const serverURL = await fastify.getServerURL();
+      const serverInfo = await fastify.convertNameToUrl(
+        request.body.sessionToken
+      );
+      if (!serverInfo.status) {
+        const error = new Error(serverInfo.msg);
+        error.status = 404;
+        error.statusText = "Not Found";
+        return error;
+      }
+
       const queryString = await createQueryStringSubmitStep(
         request,
         sessionCode
       );
-      const fullURL = serverURL + queryString;
+      const fullURL = serverInfo.url + queryString;
       let response = await fetch(fullURL);
 
       // Check for a bad response from qEval
@@ -67,7 +76,7 @@ module.exports = async function(fastify, opts) {
         request,
         sessionCode
       );
-      const fullUrlHint = serverURL + queryStringHint;
+      const fullUrlHint = serverInfo.url + queryStringHint;
       let dataHint = await handleFetchHint(fullUrlHint, queryStringHint);
 
       // Check for a bad response from qEval
