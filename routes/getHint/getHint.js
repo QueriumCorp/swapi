@@ -74,7 +74,7 @@ module.exports = async function(fastify, opts) {
         const error = new Error("There was an error in the StepWise Server");
         error.statusCode = response.status;
         error.message =
-          "The getHint command failed.There was an error in the StepWise Server";
+          "The getHint command failed. There was an error in the StepWise Server";
         error.details = queryString;
         return error;
       }

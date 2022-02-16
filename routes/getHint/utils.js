@@ -1,6 +1,7 @@
 const he = require("he");
+const fetch = require("node-fetch");
 
-const createQueryString = function (request, sessionCode) {
+const createQueryString = function(request, sessionCode) {
   // Warning: qEval does case-sensitive replacement of percent escapes,
   // and expects lower case letters e.g. %2b NOT %2B
   const { appKey } = request.body;
@@ -12,10 +13,10 @@ const createQueryString = function (request, sessionCode) {
   return [appKeyPart, cmdPart, sessionCodePart].join("");
 };
 
-const parseResponse = function (response) {
+const parseResponse = function(response) {
   if (!response || !response.length || response.indexOf("network error") > -1) {
     return {
-      success: false,
+      success: false
     };
   }
 
@@ -33,10 +34,30 @@ const parseResponse = function (response) {
 
   return {
     success: true,
-    hintText: result,
+    hintText: result
   };
 };
+
+const handleFetch = async (fullURL, queryString) => {
+  // Fetch the url
+  const response = await fetch(fullURL);
+
+  // Check for a bad response from qEval
+  if (response.status !== 200) {
+    const error = new Error("There was an error in the StepWise Server");
+    error.statusCode = response.status;
+    error.error = "There was an error in the StepWise Server";
+    error.message = response.statusText;
+    error.details = queryString;
+
+    return error;
+  }
+
+  return await response.text();
+};
+
 module.exports = {
   createQueryString,
   parseResponse,
+  handleFetch
 };
