@@ -5,10 +5,10 @@ const {
   getMathML,
   getIdentifiers,
   getOperators,
-  createQueryString,
+  createQueryString
 } = require("./utils");
 
-module.exports = async function (fastify, opts) {
+module.exports = async function(fastify, opts) {
   fastify.route({
     method: "POST",
     url: "/",
@@ -22,18 +22,21 @@ module.exports = async function (fastify, opts) {
         return error;
       }
 
+      // Acquire an Ai server
+      const serverInfo = await fastify.getServerURL();
+      fastify.log.info(JSON.stringify(serverInfo));
+
       // Create the sessionCode for this session
       const { studentId, id } = request.body;
       const { sessionCode, sessionToken } = await fastify.prepSessionInfo(
         id,
-        studentId
+        studentId,
+        serverInfo.name
       );
 
       // Create & Fetch
-      const serverURL = await fastify.getServerURL();
-
       const queryString = await createQueryString(sessionCode, request);
-      const fullURL = serverURL + queryString;
+      const fullURL = serverInfo.url + queryString;
       let response = await fetch(fullURL);
 
       // Check for a bad response from qEval
@@ -59,8 +62,8 @@ module.exports = async function (fastify, opts) {
         sessionCode: sessionCode,
         mathML: mathML,
         identifiers: ids,
-        operators: ops,
+        operators: ops
       };
-    },
+    }
   });
 };
