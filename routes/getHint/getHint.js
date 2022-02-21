@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 const schema = require("./schema");
 const { createQueryString, parseResponse } = require("./utils");
 
-module.exports = async function(fastify, opts) {
+module.exports = async function (fastify, opts) {
   fastify.route({
     method: "POST",
     url: "/",
@@ -67,6 +67,7 @@ module.exports = async function(fastify, opts) {
 
       // Sanitize the response for our protection
       const cleansed = fastify.cleanResponse(data);
+
       const result = parseResponse(cleansed);
 
       // Check for a bad response from qEval
@@ -80,7 +81,8 @@ module.exports = async function(fastify, opts) {
       }
       return {
         status: 200,
-        hintText: result.hintText
+        hintText: result.hintText,
+        hintObject: result.hintObject
       };
     }
   });
