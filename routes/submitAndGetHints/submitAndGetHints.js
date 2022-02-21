@@ -11,7 +11,7 @@ const {
   handleFetch: handleFetchHint
 } = require("../getHint/utils");
 
-module.exports = async function(fastify, opts) {
+module.exports = async function (fastify, opts) {
   fastify.route({
     method: "POST",
     url: "/",
@@ -66,7 +66,8 @@ module.exports = async function(fastify, opts) {
           status: 200,
           stepStatus: resultStep.stepStatus,
           message: resultStep.message,
-          rawResponse: data
+          rawResponse: data,
+          hintObject: []
         };
       }
 
@@ -111,8 +112,9 @@ module.exports = async function(fastify, opts) {
       return {
         status: 200,
         stepStatus: resultStep.stepStatus,
-        message: resultHint.hintText,
-        rawResponse: data
+        message: resultStep.message,
+        rawResponse: data,
+        hintObject: resultHint.hintObject
       };
     }
   });

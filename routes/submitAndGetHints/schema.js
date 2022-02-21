@@ -25,7 +25,21 @@ const responseSchema = {
         enum: ["VALID", "INVALID", "COMPLETE", "EXPIRED", "ERROR"]
       },
       message: { type: "string" },
-      rawResponse: { type: "string" }
+      rawResponse: { type: "string" },
+      hintObject: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            tag: {
+              type: "string",
+              enum: ["HINT", "ERROR"]
+            },
+            type: { type: "string" },
+            message: { type: "string" }
+          }
+        },
+      },
     }
   },
   500: {
