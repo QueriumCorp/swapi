@@ -8,7 +8,7 @@ const {
   createQueryString
 } = require("./utils");
 
-module.exports = async function(fastify, opts) {
+module.exports = async function (fastify, opts) {
   fastify.route({
     method: "POST",
     url: "/",
@@ -24,7 +24,7 @@ module.exports = async function(fastify, opts) {
 
       // Acquire an Ai server
       const serverInfo = await fastify.getServerURL();
-      fastify.log.info(JSON.stringify(serverInfo));
+      // fastify.log.info(JSON.stringify(serverInfo));
 
       // Create the sessionCode for this session
       const { studentId, id } = request.body;

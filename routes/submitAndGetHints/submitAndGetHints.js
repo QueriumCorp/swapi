@@ -76,7 +76,6 @@ module.exports = async function (fastify, opts) {
       // Handle the case: qEval can combine the feedback message and getGeneral 
       // hints in one response on an INVALID step
       const structData = hintsInResponse(cleansed);
-      console.log(structData);
       if (structData.containsHintsQ) {
         // Check for a bad response from qEval
         if (!structData.content.success) {
