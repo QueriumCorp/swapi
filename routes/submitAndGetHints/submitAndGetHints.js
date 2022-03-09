@@ -10,6 +10,7 @@ const {
   parseResponse: parseResponseGetHint,
   handleFetch: handleFetchHint
 } = require("../getHint/utils");
+const { hintsInResponse } = require("./utils");
 
 module.exports = async function (fastify, opts) {
   fastify.route({
@@ -58,6 +59,7 @@ module.exports = async function (fastify, opts) {
 
       // Sanitize the response for our protection
       let data = await response.text();
+
       const cleansed = fastify.cleanResponse(data);
       const resultStep = parseResponseSubmitStep(cleansed);
 
@@ -68,6 +70,28 @@ module.exports = async function (fastify, opts) {
           message: resultStep.message,
           rawResponse: data,
           hintObject: []
+        };
+      }
+
+      // Handle the case: qEval can combine the feedback message and getGeneral 
+      // hints in one response on an INVALID step
+      const structData = hintsInResponse(cleansed);
+      if (structData.containsHintsQ) {
+        // Check for a bad response from qEval
+        if (!structData.content.success) {
+          const error = new Error("There was an error in the StepWise Server");
+          error.statusCode = response.status;
+          error.message = "The processLRV command failed in qEval.";
+          error.details = queryString;
+          return error;
+        }
+
+        return {
+          status: 200,
+          stepStatus: resultStep.stepStatus,
+          message: structData.feedback,
+          rawResponse: data,
+          hintObject: structData.content.hintObject
         };
       }
 
