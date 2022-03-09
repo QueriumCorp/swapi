@@ -38,7 +38,7 @@ const parseResponse = function (response) {
     hintObject: []
   }
 
-  const tags = ["[HINTMSG:END]", "[ERRMSG:END]"];
+  const tags = ["[FBMSG:END]", "[HINTMSG:END]", "[ERRMSG:END]"];
   let rsltObj = [];
   if (containsAnyTagsQ(rsltStr, tags)) {
     result = { ...result, "hintText": cleanAllTags(rsltStr) };
@@ -56,8 +56,8 @@ const parseResponse = function (response) {
 };
 
 const cleanAllTags = (str) => {
-  let rslt = str.replace(/(\[ERRTYPE:START\](.*?)\[ERRTYPE:END\])|(\[HINTTYPE:START\](.*?)\[HINTTYPE:END\])/g, "")
-  rslt = rslt.replace(/\[ERRMSG:START\]|\[ERRMSG:END\]|\[HINTMSG:START\]|\[HINTMSG:END\]/g, "")
+  let rslt = str.replace(/(\[ERRTYPE:START\](.*?)\[ERRTYPE:END\])|(\[HINTTYPE:START\](.*?)\[HINTTYPE:END\])|(\[FBTTYPE:START\](.*?)\[FBTTYPE:END\])/g, "")
+  rslt = rslt.replace(/\[ERRMSG:START\]|\[ERRMSG:END\]|\[HINTMSG:START\]|\[HINTMSG:END\]|\[FBMSG:START\]|\[FBMSG:END\]/g, "")
 
   return rslt;
 }
@@ -74,11 +74,11 @@ const toObj = (hintStr, tags) => {
 
 const itemToObj = (str) => {
   // Split the hint by starting message tag
-  let arr = str.split(/\[HINTMSG:START\]|\[ERRMSG:START\]/g);
+  let arr = str.split(/\[HINTMSG:START\]|\[ERRMSG:START\]|\[FBMSG:START\]/g);
 
   // Remove the tags from the type part and trim it
   const hintType = arr[0].replace(
-    /\[ERRTYPE:START\]|\[HINTTYPE:START\]|\[ERRTYPE:END\]|\[HINTTYPE:END\]/g,
+    /\[ERRTYPE:START\]|\[HINTTYPE:START\]|\[FBTTYPE:START\]|\[ERRTYPE:END\]|\[HINTTYPE:END\]|\[FBTTYPE:END\]/g,
     ""
   ).trim();
 
@@ -89,6 +89,8 @@ const itemToObj = (str) => {
   let tag = "HINT";
   if (arr[0].includes("ERRTYPE:START")) {
     tag = "ERROR";
+  } else if (arr[0].includes("FBTTYPE:START")) {
+    tag = "FB";
   }
 
   return {
@@ -145,5 +147,6 @@ const handleFetch = async (fullURL, queryString) => {
 module.exports = {
   createQueryString,
   parseResponse,
-  handleFetch
+  handleFetch,
+  containsAnyTagsQ
 };
