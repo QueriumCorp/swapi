@@ -11,7 +11,11 @@ const closeWithGrace = require("close-with-grace");
 
 // Instantiate Fastify with some config
 const app = Fastify({
-  logger: true
+  // disableRequestLogging: true,
+  logger: {
+    level: 'info',
+    file: process.env.LOGFILE || '/var/log/swapi_log.json'
+  },
 });
 
 // Register your application as a normal plugin.
@@ -19,7 +23,7 @@ const appService = require("./app.js");
 app.register(appService);
 
 // delay is the number of milliseconds for the graceful close to finish
-const closeListeners = closeWithGrace({ delay: 500 }, async function({
+const closeListeners = closeWithGrace({ delay: 500 }, async function ({
   signal,
   err,
   manual
