@@ -8,8 +8,7 @@ module.exports = fp(async function (fastify, opts) {
     if (payload) {
       request.log.info(
         {
-          body: payload,
-          context: reply.rapportiniContext
+          body: payload
         },
         ':RESPONSE:'
       )

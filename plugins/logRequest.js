@@ -10,9 +10,8 @@ module.exports = fp(async function (fastify, opts) {
         {
           method: req.method,
           url: req.url,
-          parameters: req.parameters,
           body: req.body,
-          headers: req.headers,
+          headers: req.headers
         },
         ':REQUEST:'
       )
