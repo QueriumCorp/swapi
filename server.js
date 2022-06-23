@@ -14,7 +14,7 @@ const app = Fastify({
   // disableRequestLogging: true,
   logger: {
     level: 'info',
-    file: process.env.LOGFILE || '/var/log/swapi_log.json'
+    file: process.env.LOGFILE || '/home/ubuntu/.pm2/logs/swapi_log.json'
   },
 });
 
