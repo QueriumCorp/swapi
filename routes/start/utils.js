@@ -10,7 +10,9 @@ const createQueryString = function (sessionCode, request) {
   const sessionCodePart = "&session=" + sessionCode;
   const classCodePart = "&class=" + encodeURIComponent(topic);
   const questionPart = "&question=" + prepQuestionDef(definition);
-  const policyPart = "&policies=" + "$A7$";
+  // $A7$ is Aktiv production
+  // $A8$ is Aktiv development (e.g. no short timeouts)
+  const policyPart = "&policies=" + "$A8$";
   const hint1Part = "&qs1=" + prepQueryString(hints[0]);
   const hint2Part = "&qs2=" + prepQueryString(hints[1]);
   const hint3Part = "&qs3=" + prepQueryString(hints[2]);
