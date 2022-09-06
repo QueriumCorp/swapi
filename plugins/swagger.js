@@ -9,13 +9,13 @@ module.exports = fp((fastify, opts, next) => {
         title: "Querium StepWise API",
         description:
           "#Intro This is the API for Querium's AI-based StepWise virtual tutor",
-        version: "0.1.0"
+        version: "0.2.0"
       },
       externalDocs: {
         url: "http://www.querium.com",
         description: "Find more info here"
       },
-      host: "qq-stepwise-api.querium.com",
+      host: "dev.qq-stepwise-api.querium.com",
       schemes: ["https", "http"],
       consumes: ["application/json"],
       produces: ["application/json"]
