@@ -57,5 +57,5 @@ profile*
 *clinic*
 *flamegraph*
 
-# environment
-.env*
+# environment (Now manage .env in github)
+# .env*
