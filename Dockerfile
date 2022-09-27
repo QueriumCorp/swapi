@@ -23,7 +23,7 @@ RUN npm install
 
 # create /home/ubuntu/.pm2/logs/
 # see: server.js in this repo
-RUN mkdir home \
+RUN mkdir /home \
  && mkdir ubuntu \
  && mkdir .pm2 \
  && mkdir logs \
