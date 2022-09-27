@@ -23,8 +23,7 @@ RUN npm install
 
 # create /home/ubuntu/.pm2/logs/
 # see: server.js in this repo
-RUN mkdir /home \
- && mkdir ubuntu \
+RUN mkdir /home/ubuntu \
  && mkdir .pm2 \
  && mkdir logs \
  && touch swapi_log.json \
