@@ -14,15 +14,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # common settings
-      # --------------------------------------------
       AWS_REGION: us-east-2
-
-      # environment settings
-      # --------------------------------------------
       ENVIRONMENT_ID: dev
-
+      REPOSITORY: querium/swapi-dev
     steps:
+      - name: Intialize AWS ECR repo URIs
+        shell: bash
+        run: |-
+          echo "AWS_ECR_REPOSITORY_SWAPI=${AWS_ECR_URI}/querium/swapi-${{ env.ENVIRONMENT_ID }}" >> $GITHUB_ENV
+
       #------------------------------------------------------------------------
       # Initialize our Ubuntu environment using a common Action stored in this
       # repository
@@ -32,10 +32,39 @@ jobs:
         with:
           aws-region: ${{ env.AWS_REGION }}
 
-      #------------------------------------------------------------------------
-      # Build and upload the Docker container
-      #------------------------------------------------------------------------
-      - name: Build swapi
-        uses: ./.github/actions/build
-        with:
-          aws-ecr-repository: 'swapi-${{ env.ENVIRONMENT_ID }}'
+    # verify that the ECR repository exists. If not, then create it.
+    # written and maintained by Lawrence McDaniel
+    - name: Create the AWS ECR repository
+      id: create-repository
+      uses: lpm0073/aws-ecr-create@v0.1.1
+      with:
+        aws-ecr-repository: ${{ env.REPOSITORY }}
+
+    - name: Intialize environment variables
+      id: init-env
+      shell: bash
+      run: |
+        echo "AWS_ECR_REGISTRY_SWAPI=${{ steps.login-ecr.outputs.registry }}" >> $GITHUB_ENV
+        echo "AWS_ECR_REPOSITORY_SWAPI=${{ env.REPOSITORY }}" >> $GITHUB_ENV
+        echo "REPOSITORY_TAG_SWAPI=$TUTOR_VERSION-$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
+
+    - name: Initialize Docker image URI
+      id: init-docker-image
+      shell: bash
+      run: |
+        echo "DOCKER_IMAGE_SWAPI=${AWS_ECR_REGISTRY_SWAPI}/${AWS_ECR_REPOSITORY_SWAPI}:${REPOSITORY_TAG_SWAPI}" >> $GITHUB_ENV
+
+    - name: Build the image
+      id: tutor-build-image
+      shell: bash
+      run: |-
+        echo "build the Docker image"
+        docker build . -t ${DOCKER_IMAGE_SWAPI}
+
+    - name: Push the image
+      id: docker-push-image
+      shell: bash
+      run: |-
+        echo "push the Docker image"
+        docker tag ${AWS_ECR_REGISTRY}/${{ inputs.aws-ecr-repository }}:${REPOSITORY_TAG_SWAPI} ${AWS_ECR_REGISTRY}/${AWS_ECR_REPOSITORY_SWAPI}:latest
+        docker push ${AWS_ECR_REGISTRY}/${{ inputs.aws-ecr-repository }}:latest
