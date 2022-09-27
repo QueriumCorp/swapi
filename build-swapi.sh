@@ -10,7 +10,7 @@
 GITHUB_PAT="SET-ME-PLEASE"          # see: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
 AWS_ACCOUNT_NUMBER="320713933456"   # AWS account for Stepwise Math
 AWS_REGION="us-east-2"              # Region where AWS ECR repository is located
-SWAPI_ENVIRONMENT="dev"             # dev or prod
+SWAPI_ENVIRONMENT="prod"             # dev or prod
 
 # fundamentals for creating AWS ECR URI
 AWS_ECR_REGISTRY_SWAPI="${AWS_ACCOUNT_NUMBER}.dkr.ecr.${AWS_REGION}.amazonaws.com"
@@ -24,7 +24,7 @@ sudo rm -r /home/ubuntu/swapi
 # clone the latest
 git clone https://${GITHUB_PAT}@github.com/QueriumCorp/swapi.git
 cd swapi
-git checkout ci
+git checkout master
 
 
 # This is an aws cli helper command that facilitates a seamless a Docker push to AWS ECR.
