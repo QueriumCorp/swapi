@@ -30,15 +30,6 @@ spec:
               memory: 2Gi
         securityContext:
           allowPrivilegeEscalation: false
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        volumeMounts:
-        - mountPath: /openedx/edx-platform/lms/envs/tutor/
-          name: settings-lms
-        - mountPath: /openedx/edx-platform/cms/envs/tutor/
-          name: settings-cms
-        - mountPath: /openedx/config
-          name: config
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

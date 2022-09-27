@@ -38,7 +38,7 @@ runs:
     - name: Apply Kubernetes manifests
       shell: bash
       run:  |-
-        # Create kubernetes ingress and other environment resources
+        # Create kubernetes deployment, ingress and other resources
         kubectl apply -f "ci/deploy/environments/${{ inputs.environment-id }}/k8s"
 
     #------------------------------------------------------------------------
