@@ -38,14 +38,14 @@ jobs:
       id: create-repository
       uses: lpm0073/aws-ecr-create@v0.1.1
       with:
-        aws-ecr-repository: ${{ env.REPOSITORY }}
+        aws-ecr-repository: '${{ env.REPOSITORY }}-${{ env.ENVIRONMENT_ID }}'
 
     - name: Intialize environment variables
       id: init-env
       shell: bash
       run: |
         echo "AWS_ECR_REGISTRY_SWAPI=${{ steps.login-ecr.outputs.registry }}" >> $GITHUB_ENV
-        echo "AWS_ECR_REPOSITORY_SWAPI=${{ env.REPOSITORY }}" >> $GITHUB_ENV
+        echo "AWS_ECR_REPOSITORY_SWAPI='${{ env.REPOSITORY }}-${{ env.ENVIRONMENT_ID }}'" >> $GITHUB_ENV
         echo "REPOSITORY_TAG_SWAPI=$TUTOR_VERSION-$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
 
     - name: Initialize Docker image URI
