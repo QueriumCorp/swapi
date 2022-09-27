@@ -21,13 +21,13 @@ COPY package*.json ./
 
 RUN npm install
 
-# create /home/ubuntu/.pm2/logs/
+# create /home/ubuntu/.pm2/logs/swapi_log.json
 # see: server.js in this repo
 RUN mkdir /home/ubuntu \
- && mkdir .pm2 \
- && mkdir logs \
- && touch swapi_log.json \
- && chmod 644 swapi_log.json
+ && mkdir /home/ubuntu/.pm2 \
+ && mkdir /home/ubuntu/.pm2/logs \
+ && touch /home/ubuntu/.pm2/logs/swapi_log.json \
+ && chmod 644 /home/ubuntu/.pm2/logs/swapi_log.json
 
 # Copy all other files
 # MCDANIEL: 
