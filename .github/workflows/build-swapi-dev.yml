@@ -1,0 +1,41 @@
+#------------------------------------------------------------------------------
+# written by: mcdaniel
+# date: june-2022
+#
+# usage: top-level workflow. Initiated manually from Github Actions console page
+#        Builds all Docker containers.
+#------------------------------------------------------------------------------
+name: Build Querium SWAPI dev
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # common settings
+      # --------------------------------------------
+      AWS_REGION: us-east-2
+
+      # environment settings
+      # --------------------------------------------
+      ENVIRONMENT_ID: dev
+
+    steps:
+      #------------------------------------------------------------------------
+      # Initialize our Ubuntu environment using a common Action stored in this
+      # repository
+      #------------------------------------------------------------------------
+      - name: Initialize environment
+        uses: ./.github/actions/init
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+
+      #------------------------------------------------------------------------
+      # Build and upload the Docker container
+      #------------------------------------------------------------------------
+      - name: Build swapi
+        uses: ./.github/actions/build
+        with:
+          aws-ecr-repository: 'swapi-${{ env.ENVIRONMENT_ID }}'
