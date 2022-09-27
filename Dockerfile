@@ -4,7 +4,7 @@
 #
 # date:            sep-2022
 #
-# usage:           build SWAPI prod container
+# usage:           build SWAPI dev container
 #
 # see: https://medium.com/@pedro.schleder/use-docker-to-develop-a-node-js-app-part-1-b1b009008425
 # -----------------------------------------------------------------------------
@@ -21,11 +21,15 @@ COPY package*.json ./
 
 RUN npm install
 
-# Copy everything else on the project
+# Copy all other files
+# MCDANIEL: 
+# FIX NOTE: it would be advantageous to refactor the repo, moving
+# the actual js source code into a folder named 'src' so that we're
+# not copying all of the dev and ci files into the container.
 COPY . .
 
 # Expose the port we want to use
 EXPOSE 8080
 
-# Tell Docker to run server.js on spin up
+# Tell Docker to run server.js when the container is deployed to k8s
 CMD [ "node", "server.js" ]
