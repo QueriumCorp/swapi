@@ -18,15 +18,10 @@ jobs:
     # --------------------------------------------
     runs-on: ubuntu-latest
     env:
-      # common settings
-      # --------------------------------------------
       AWS_REGION: us-east-2
-
-      # environment settings
-      # --------------------------------------------
-      ENVIRONMENT_ID: dev
       NAMESPACE: querium-swapi
       EKS_CLUSTER_NAME: stepwisemath-global-live
+      ENVIRONMENT_ID: dev
 
     # deployment workflow begins here
     # --------------------------------------------
@@ -39,6 +34,8 @@ jobs:
         uses: ./.github/actions/init
         with:
           aws-region: ${{ env.AWS_REGION }}
+          k8s-namespace: ${{ env.NAMESPACE }}
+          eks-cluster-name: ${{ env.EKS_CLUSTER_NAME }}
 
       # ---------------------------------------------------------------------------------
       # Deploy

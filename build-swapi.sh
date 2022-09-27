@@ -18,6 +18,10 @@ AWS_ECR_REPOSITORY_SWAPI="querium/swapi-${SWAPI_ENVIRONMENT}"
 REPOSITORY_TAG_SWAPI="$(date +%Y%m%d%H%M)"
 DOCKER_TAGGED_IMAGE=${AWS_ECR_REPOSITORY_SWAPI}:${REPOSITORY_TAG_SWAPI}
 
+# if we have a .env file in the home folder then load it.
+if [ -f ".env" ]; then
+    export $(grep -v '^#' .env | xargs)
+fi
 
 sudo rm -r /home/ubuntu/swapi
 

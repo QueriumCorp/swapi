@@ -25,4 +25,4 @@ spec:
           # for the environment domain.
           route53:
             region: us-east-2
-            hostedZoneID: Z06698743TG5Z98W1QXYB   # FIX NOTE: CHANGE ME
+            hostedZoneID: Z06358513M28GC21LKF77

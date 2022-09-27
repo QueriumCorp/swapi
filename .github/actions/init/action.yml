@@ -22,6 +22,16 @@ inputs:
     required: false
     default: us-east-2
     type: string
+  k8s-namespace:
+    description: 'Example: querium-swapi'
+    required: false
+    default: 'querium-swapi'
+    type: string
+  eks-cluster-name:
+    description: 'Example: stepwise-global-live'
+    required: false
+    default: 'stepwise-global-live'
+    type: string
 runs:
   using: "composite"
   steps:
@@ -40,7 +50,7 @@ runs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ env.AWS_REGION }}
+        aws-region: ${{ inputs.aws-region }}
 
     # Setup a connection to our AWS Elastic Container Registry so that we can pull
     # containers that we created with the build workflows in this Cookiecutter.
@@ -55,21 +65,11 @@ runs:
     - name: Initialize environment
       uses: openedx-actions/tutor-k8s-init@v1.0.4
       with:
-        eks-namespace: ${{ env.NAMESPACE }}
-        eks-cluster-name: ${{ env.EKS_CLUSTER_NAME }}
-        aws-region: ${{ env.AWS_REGION }}
-        tutor-version: "14.0.5"
+        eks-cluster-name: ${{ inputs.eks-cluster-name }}
+        aws-region: ${{ inputs.aws-region }}
 
-    # ---------------------------------------------------------------------------------
-    # initialize workflow environment variables
-    # ---------------------------------------------------------------------------------
-    - name: Intialize AWS_ECR_URI
+    - name: Create k8s namespace if it does not exist
+      id: create-namespace
       shell: bash
       run: |-
-        echo "AWS_ECR_URI=${{ steps.login-ecr.outputs.registry }}" >> $GITHUB_ENV
-
-    - name: Intialize AWS ECR repo URI for the swapi container
-      shell: bash
-      run: |-
-        echo "AWS_ECR_REPOSITORY_SWAPI_DEV=${AWS_ECR_URI}/swapi-dev:latest" >> $GITHUB_ENV
-
+        kubectl create namespace ${{ inputs.eks-cluster-name }} --dry-run=client -o yaml | kubectl apply -f -
