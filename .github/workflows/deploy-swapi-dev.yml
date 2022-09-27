@@ -1,0 +1,50 @@
+#------------------------------------------------------------------------------
+# written by: mcdaniel
+# date:       sep-2022
+#
+# usage:      build a docker container for swapi development and push to aws ecr.
+#------------------------------------------------------------------------------
+name: Deploy Querium SWAPI dev
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    # ´runs-on´ defines the operating environment for the 
+    # Github action itself. This almost always should
+    # be some version of ubuntu. If you're unsure then use
+    # ubuntu-latest.
+    # --------------------------------------------
+    runs-on: ubuntu-latest
+    env:
+      # common settings
+      # --------------------------------------------
+      AWS_REGION: us-east-2
+
+      # environment settings
+      # --------------------------------------------
+      ENVIRONMENT_ID: dev
+      NAMESPACE: querium-swapi
+      EKS_CLUSTER_NAME: stepwisemath-global-live
+
+    # deployment workflow begins here
+    # --------------------------------------------
+    steps:
+      #------------------------------------------------------------------------
+      # Initialize our Ubuntu environment using a common Action stored in this
+      # repository
+      #------------------------------------------------------------------------
+      - name: Initialize environment
+        uses: ./.github/actions/init
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+
+      # ---------------------------------------------------------------------------------
+      # Deploy
+      # ---------------------------------------------------------------------------------
+      - name: Deploy to Kubernetes
+        uses: ./.github/actions/deploy
+        with:
+          environment-id: ${{ env.ENVIRONMENT_ID }}
+          namespace: ${{ env.NAMESPACE }}
