@@ -24,7 +24,7 @@ sudo rm -r /home/ubuntu/swapi
 # clone the latest
 git clone https://${GITHUB_PAT}@github.com/QueriumCorp/swapi.git
 cd swapi
-git checkout ci
+git checkout dev-service
 
 
 # This is an aws cli helper command that facilitates a seamless a Docker push to AWS ECR.
