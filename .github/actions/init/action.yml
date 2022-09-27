@@ -1,0 +1,75 @@
+#------------------------------------------------------------------------------
+# written by: Lawrence McDaniel
+#             https://lawrencemcdaniel.com
+#
+# date:       sep-2022
+#
+# usage:      initialize the Github Actions operating environment.
+#             - checkout all Github repos
+#             - create a session token for aws cli
+#             - login to the AWS Elastic Container Registry
+#             - install needed software packages
+#             - initialize AWS ECR URIs
+#------------------------------------------------------------------------------
+name: Initialize Github Actions environment for build/deploy work flows
+description: 'Initialize Github Actions environment with aws-cli, aws ecr login, install kubectl and other required system packages'
+branding:
+  color: 'orange'
+  icon: 'cloud'
+inputs:
+  aws-region:
+    description: 'The AWS region in which the AWS Elastic Container Registry and EKS Kubernetes cluster are located.'
+    required: false
+    default: us-east-2
+    type: string
+runs:
+  using: "composite"
+  steps:
+    # checkout github all repos for this workflow: this repo, plus, 
+    # all Gihubs Actions repos in this workflow. 
+    # this is written and maintained by Github
+    - name: Checkout
+      uses: actions/checkout@v3.0.2
+
+    # AWS helper method. creates a session token that's usable by all other
+    # aws-actions. Prevents us from having to explicitly provide authentication credentials
+    # to each aws-actions method individually.
+    # This is written and maintained by AWS.
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1.7.0
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    # Setup a connection to our AWS Elastic Container Registry so that we can pull
+    # containers that we created with the build workflows in this Cookiecutter.
+    # this is written and maintained by AWS.
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    # Open edX Github Actions init procedure. Provides reliable initializations of
+    # kubectl, aws-cli and tutor.
+    # this is written and maintained by Lawrence McDaniel + the Open edX devops community
+    - name: Initialize environment
+      uses: openedx-actions/tutor-k8s-init@v1.0.4
+      with:
+        eks-namespace: ${{ env.NAMESPACE }}
+        eks-cluster-name: ${{ env.EKS_CLUSTER_NAME }}
+        aws-region: ${{ env.AWS_REGION }}
+        tutor-version: "14.0.5"
+
+    # ---------------------------------------------------------------------------------
+    # initialize workflow environment variables
+    # ---------------------------------------------------------------------------------
+    - name: Intialize AWS_ECR_URI
+      shell: bash
+      run: |-
+        echo "AWS_ECR_URI=${{ steps.login-ecr.outputs.registry }}" >> $GITHUB_ENV
+
+    - name: Intialize AWS ECR repo URI for the swapi container
+      shell: bash
+      run: |-
+        echo "AWS_ECR_REPOSITORY_SWAPI_DEV=${AWS_ECR_URI}/swapi-dev:latest" >> $GITHUB_ENV
+
