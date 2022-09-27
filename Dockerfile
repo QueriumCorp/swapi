@@ -21,6 +21,15 @@ COPY package*.json ./
 
 RUN npm install
 
+# create /home/ubuntu/.pm2/logs/
+# see: server.js in this repo
+RUN mkdir home \
+ && mkdir ubuntu \
+ && mkdir .pm2 \
+ && mkdir logs \
+ && touch swapi_log.json \
+ && chmod 644 swapi_log.json
+
 # Copy all other files
 # MCDANIEL: 
 # FIX NOTE: it would be advantageous to refactor the repo, moving
