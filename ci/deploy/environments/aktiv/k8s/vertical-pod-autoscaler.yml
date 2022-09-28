@@ -1,3 +1,9 @@
+#------------------------------------------------------------------------------
+# written by:   Lawrence McDaniel
+# date:         sep-2022
+#
+# usage:        set parameters of the vertical pod auto scaling policy
+#------------------------------------------------------------------------------
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:

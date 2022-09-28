@@ -1,3 +1,9 @@
+#------------------------------------------------------------------------------
+# written by:   Lawrence McDaniel
+# date:         sep-2022
+#
+# usage:        Kubernetes service manifest
+#------------------------------------------------------------------------------
 apiVersion: v1
 kind: Service
 metadata:
