@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: swapi-dev
+  name: swapi-aktiv
   namespace: querium-swapi
   labels:
-    app.kubernetes.io/instance: swapi-dev
-    app.kubernetes.io/name: swapi-dev
-    app: swapi-dev
+    app.kubernetes.io/instance: swapi-aktiv
+    app.kubernetes.io/name: swapi-aktiv
+    app: swapi-aktiv
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: swapi-dev
+      app: swapi-aktiv
   template:
     metadata:
       labels:
-        app: swapi-dev
+        app: swapi-aktiv
     spec:
       containers:
       - env:
         - name: SWAPI_ENVIRONMENT
-          value: dev
-        image: 320713933456.dkr.ecr.us-east-2.amazonaws.com/querium/swapi-dev:latest
+          value: aktiv
+        image: 320713933456.dkr.ecr.us-east-2.amazonaws.com/querium/swapi:latest
         imagePullPolicy: Always
-        name: swapi-dev
+        name: swapi-aktiv
         ports:
-        - containerPort: 8080
+        - containerPort: 80
           protocol: TCP
         resources:
             requests:

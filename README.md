@@ -25,7 +25,7 @@ The Github Actions Deploy workflow will deploy the latest Swapi build to the [st
 
 1. initializes the Github Actions runner (see details below)
 2. if necessary, creates a "querium-swapi" namespace in the Kubernetes cluster
-3. runs the Kubernetes manifests located [here, in this repository](ci/deploy/environments/dev/k8s/). Kubernetes manifests are written in yaml and are generally intuitive to read and edit.
+3. runs the Kubernetes manifests located [here, in this repository](ci/deploy/environments/aktiv/k8s/). Kubernetes manifests are written in yaml and are generally intuitive to read and edit.
 
 Note that there is an alternative bash script implementation of this same procedure, [located here](swapi-deploy.sh) that you can run from the stepwise bastion command line.
 

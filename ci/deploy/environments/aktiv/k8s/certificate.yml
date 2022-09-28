@@ -12,10 +12,10 @@ kind: Certificate
 metadata:
   name: le-crt
 spec:
-  secretName: wild-swapi-dev-tls
+  secretName: wild-swapi-aktiv-tls
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt
-  commonName: dev.qq-stepwise-api.querium.com
+  commonName: aktiv.qq-stepwise-api.querium.com
   dnsNames:
-    - "*.dev.qq-stepwise-api.querium.com"
+    - "*.aktiv.qq-stepwise-api.querium.com"
