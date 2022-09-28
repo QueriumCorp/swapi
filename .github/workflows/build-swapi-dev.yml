@@ -30,7 +30,7 @@ jobs:
       - name: Where are we?
         id: where-are-we
         shell: bash
-        run: |
+        run: |-
           pwd
           ls -lha
 
