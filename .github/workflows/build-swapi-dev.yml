@@ -24,7 +24,7 @@ jobs:
       - name: Intialize AWS ECR repo URIs
         shell: bash
         run: |-
-          echo "AWS_ECR_REPOSITORY_SWAPI=${AWS_ECR_URI}/querium/swapi-${{ env.ENVIRONMENT_ID }}" >> $GITHUB_ENV
+          echo "CONTAINER_NAME=${AWS_ECR_URI}/querium/swapi-${{ env.ENVIRONMENT_ID }}" >> $GITHUB_ENV
 
       #------------------------------------------------------------------------
       # Initialize our Ubuntu environment using a common Action stored in this
@@ -44,16 +44,16 @@ jobs:
           aws-ecr-repository: '${{ env.REPOSITORY }}-${{ env.ENVIRONMENT_ID }}'
 
       # Derive the three components of the AWS ECR URI
-      # - AWS_ECR_REGISTRY_SWAPI: 320713933456.dkr.ecr.us-east-2.amazonaws.com
-      # - AWS_ECR_REPOSITORY_SWAPI: querium/swapi-dev
-      # - REPOSITORY_TAG_SWAPI: 202209162127
+      # - AWS_ECR_REGISTRY: 320713933456.dkr.ecr.us-east-2.amazonaws.com
+      # - CONTAINER_NAME: querium/swapi-dev
+      # - DATE_TAG: 202209162127
       - name: Intialize environment variables
         id: init-env
         shell: bash
         run: |
-          echo "AWS_ECR_REGISTRY_SWAPI=${{ steps.login-ecr.outputs.registry }}" >> $GITHUB_ENV
-          echo "AWS_ECR_REPOSITORY_SWAPI='${{ env.REPOSITORY }}-${{ env.ENVIRONMENT_ID }}'" >> $GITHUB_ENV
-          echo "REPOSITORY_TAG_SWAPI=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
+          echo "AWS_ECR_REGISTRY=${{ steps.login-ecr.outputs.registry }}" >> $GITHUB_ENV
+          echo "CONTAINER_NAME='${{ env.REPOSITORY }}-${{ env.ENVIRONMENT_ID }}'" >> $GITHUB_ENV
+          echo "DATE_TAG=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
 
       # create the AWS ECR URI
       # example: 320713933456.dkr.ecr.us-east-2.amazonaws.com/querium/swapi-dev:202209162127
@@ -61,20 +61,20 @@ jobs:
         id: init-docker-image
         shell: bash
         run: |
-          echo "DOCKER_IMAGE_SWAPI=${AWS_ECR_REGISTRY_SWAPI}/${AWS_ECR_REPOSITORY_SWAPI}:${REPOSITORY_TAG_SWAPI}" >> $GITHUB_ENV
-          echo "DOCKER_IMAGE_SWAPI_LATEST=${AWS_ECR_REGISTRY_SWAPI}/${AWS_ECR_REPOSITORY_SWAPI}:latest" >> $GITHUB_ENV
+          echo "DOCKER_IMAGE_TAGGED=${AWS_ECR_REGISTRY}/${CONTAINER_NAME}:${DATE_TAG}" >> $GITHUB_ENV
+          echo "DOCKER_IMAGE_LATEST=${AWS_ECR_REGISTRY}/${CONTAINER_NAME}:latest" >> $GITHUB_ENV
 
       - name: Build the image
         id: tutor-build-image
         shell: bash
         run: |-
           echo "build the Docker image"
-          docker build . -t ${DOCKER_IMAGE_SWAPI}
+          docker build . -t ${DOCKER_IMAGE_TAGGED}
 
       - name: Push the image
         id: docker-push-image
         shell: bash
         run: |-
           echo "push the Docker image"
-          docker tag ${DOCKER_IMAGE_SWAPI} ${DOCKER_IMAGE_SWAPI_LATEST}
-          docker push ${DOCKER_IMAGE_SWAPI_LATEST}
+          docker tag ${DOCKER_IMAGE_TAGGED} ${DOCKER_IMAGE_LATEST}
+          docker push ${DOCKER_IMAGE_LATEST}
