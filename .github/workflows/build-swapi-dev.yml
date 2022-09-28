@@ -27,11 +27,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3.0.2
 
-      - name: Where are we?
-        id: where-are-we
+      - name: Where are we pwd?
+        id: where-are-we-pwd
         shell: bash
         run: |-
           pwd
+
+      - name: Where are we ls?
+        id: where-are-we-ls
+        shell: bash
+        run: |-
           ls -lha
 
       #------------------------------------------------------------------------
@@ -42,6 +47,8 @@ jobs:
         uses: ./.github/actions/init
         with:
           aws-region: ${{ env.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       # verify that the ECR repository exists. If not, then create it.
       # written and maintained by Lawrence McDaniel

@@ -17,6 +17,14 @@ branding:
   color: 'orange'
   icon: 'cloud'
 inputs:
+  aws-access-key-id: 
+    description: 'aws cli key'
+    required: true
+    type: string
+  aws-secret-access-key:
+    description: 'aws cli secret'
+    required: true
+    type: string
   aws-region:
     description: 'The AWS region in which the AWS Elastic Container Registry and EKS Kubernetes cluster are located.'
     required: false
@@ -32,6 +40,8 @@ inputs:
     required: false
     default: 'stepwise-global-live'
     type: string
+
+
 runs:
   using: "composite"
   steps:
@@ -48,8 +58,8 @@ runs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1.7.0
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-access-key-id: ${{ inputs.aws-access-key-id }}
+        aws-secret-access-key: ${{ inputs.aws-secret-access-key }}
         aws-region: ${{ inputs.aws-region }}
 
     # Setup a connection to our AWS Elastic Container Registry so that we can pull
