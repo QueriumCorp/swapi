@@ -4,6 +4,8 @@ metadata:
   name: swapi-dev
   namespace: querium-swapi
   labels:
+    app.kubernetes.io/instance: swapi-dev
+    app.kubernetes.io/name: swapi-dev
     app: swapi-dev
 spec:
   replicas: 1

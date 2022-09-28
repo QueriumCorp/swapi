@@ -17,7 +17,6 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    app.kubernetes.io/instance: swapi-dev
-    app.kubernetes.io/name: swapi-dev
+    app: swapi-dev
   sessionAffinity: None
   type: ClusterIP

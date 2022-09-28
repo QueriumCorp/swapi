@@ -12,6 +12,10 @@ kind: Ingress
 metadata:
   name: swapi-dev
   namespace: querium-swapi
+  labels:
+    app.kubernetes.io/instance: swapi-dev
+    app.kubernetes.io/name: swapi-dev
+    app: swapi-dev
   annotations:
     # base annotations: pretty much all ingresses need these.
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
@@ -27,10 +31,10 @@ spec:
   - host: dev.qq-stepwise-api.querium.com
     http:
       paths:
-      - path: /
-        pathType: Prefix
-        backend:
+      - backend:
           service:
             name: swapi-dev
             port:
               number: 8080
+        path: /
+        pathType: Prefix
