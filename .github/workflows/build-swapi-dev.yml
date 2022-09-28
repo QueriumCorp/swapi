@@ -9,7 +9,7 @@
 #             - upload to AWS ECR
 #             - tag as latest.
 #------------------------------------------------------------------------------
-name: Build Querium SWAPI
+name: Build and Push
 
 on:
   workflow_dispatch:
