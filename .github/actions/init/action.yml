@@ -30,11 +30,6 @@ inputs:
     required: false
     default: us-east-2
     type: string
-  k8s-namespace:
-    description: 'Example: querium-swapi'
-    required: false
-    default: 'querium-swapi'
-    type: string
   eks-cluster-name:
     description: 'Example: stepwise-global-live'
     required: false
@@ -74,12 +69,6 @@ runs:
     # this is written and maintained by Lawrence McDaniel + the Open edX devops community
     - name: Initialize environment
       uses: openedx-actions/tutor-k8s-init@v1.0.4
-    #  with:
-    #    eks-cluster-name: ${{ inputs.eks-cluster-name }}
-    #    aws-region: ${{ inputs.aws-region }}
-
-    - name: Create k8s namespace if it does not exist
-      id: create-namespace
-      shell: bash
-      run: |-
-        kubectl create namespace ${{ inputs.eks-cluster-name }} --dry-run=client -o yaml | kubectl apply -f -
+      with:
+        eks-cluster-name: ${{ inputs.eks-cluster-name }}
+        aws-region: ${{ inputs.aws-region }}
