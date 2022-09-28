@@ -4,6 +4,8 @@ metadata:
   name: swapi-dev
   namespace: querium-swapi
   labels:
+    app.kubernetes.io/instance: swapi-dev
+    app.kubernetes.io/name: swapi-dev
     app: swapi-dev
 spec:
   internalTrafficPolicy: Cluster
@@ -13,9 +15,9 @@ spec:
   ports:
   - port: 8080
     protocol: TCP
-    targetPort: http
-    name: http
+    targetPort: 8080
   selector:
+    app.kubernetes.io/instance: swapi-dev
     app.kubernetes.io/name: swapi-dev
   sessionAffinity: None
   type: ClusterIP
