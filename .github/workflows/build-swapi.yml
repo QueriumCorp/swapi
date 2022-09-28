@@ -49,7 +49,7 @@ jobs:
         id: create-repository
         uses: lpm0073/aws-ecr-create@v0.1.1
         with:
-          aws-ecr-repository: ${{ env.REPOSITORY }}'
+          aws-ecr-repository: ${{ env.REPOSITORY }}
 
       # Derive the three components of the AWS ECR URI
       # - AWS_ECR_REGISTRY: 320713933456.dkr.ecr.us-east-2.amazonaws.com
