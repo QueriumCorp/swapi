@@ -41,7 +41,7 @@ The Github Actions Deploy workflow will deploy the latest Swapi build to the [st
 
 Note that there is an alternative bash script implementation of this same procedure, [located here](swapi-deploy.sh) that you can run from the stepwise bastion command line.
 
-The stepwise bastion server is the most convenient environment to view the state of the Kubernetes cluster. This small AWS EC2 Ubuntu is automatically configured with all necessary software and credentials, and it includes "getting started" help in the login banner. If that's still not enough for your needs then contact Lawrence McDaniel (lawrence@querium.com).
+The stepwise bastion server is the most convenient environment to view the state of the Kubernetes cluster. This small AWS EC2 Ubuntu instance is automatically configured with all necessary software and credentials, and it includes "getting started" help in the login banner. If that's still not enough for your needs then contact Lawrence McDaniel (lawrence@querium.com).
 
 ![k9s swapi](/doc/k9s-swapi.png?raw=true "k9s swapi")
 
@@ -52,7 +52,7 @@ Github Actions is a mostly-free devops and CI automation service. It uses "runne
 - our Github Actions workflows are located [in this repo](.github/workflows). Workflows are coded in yaml.
 - Github Actions Workflows are a codified collection of Github Actions.
 - Github Actions, in turn, are discrete automation steps that can be coded in a variety languages. Our work flows generally are coded in either bash or using the [proprietary commands](https://docs.github.com/en/actions/quickstart) provided by Github Actions.
-- Workflows can call Github Actions stored locally inside this repository as well as third party Github Actions that are written and maintained by other organizations. Our work flows make use of both.
+- Workflows can call Github Actions stored locally inside this repository as well as third party Github Actions that are written and maintained by other organizations. Our work flows make use of both. Some example 3rd Actions that we leverage in our workflows include: [Open edX Tutor k9s init](https://github.com/marketplace/actions/open-edx-tutor-k8s-init), [Configure AWS Credentials](https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions), and [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx).
 - we initialize the runner with Ubuntu-latest, regardless of the nature of the work flow.
 - we install and configure ALL software that is necessary for performing the workflow. Generally this includes the AWS command-line interface as well as kubectl. Both of these require some minimal amount of configuration, which is done for you.
 - Authorizations to all AWS services in these work flows is based entirely on the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY key pair [located here:](https://github.com/QueriumCorp/swapi/settings/secrets/actions).
