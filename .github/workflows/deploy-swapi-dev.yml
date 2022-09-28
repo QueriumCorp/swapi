@@ -20,28 +20,52 @@ jobs:
     env:
       AWS_REGION: us-east-2
       NAMESPACE: querium-swapi
-      EKS_CLUSTER_NAME: stepwisemath-global-live
       ENVIRONMENT_ID: dev
 
     # deployment workflow begins here
     # --------------------------------------------
     steps:
+      # checkout github all repos for this workflow: this repo, plus, 
+      # all Gihubs Actions repos in this workflow. 
+      # this is written and maintained by Github
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+
+      # AWS helper method. creates a session token that's usable by all other
+      # aws-actions. Prevents us from having to explicitly provide authentication credentials
+      # to each aws-actions method individually.
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1.7.0
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1.5.1
+
       #------------------------------------------------------------------------
       # Initialize our Ubuntu environment using a common Action stored in this
       # repository
       #------------------------------------------------------------------------
       - name: Initialize environment
         uses: ./.github/actions/init
-        with:
-          aws-region: ${{ env.AWS_REGION }}
-          k8s-namespace: ${{ env.NAMESPACE }}
-          eks-cluster-name: ${{ env.EKS_CLUSTER_NAME }}
 
-      # ---------------------------------------------------------------------------------
-      # Deploy
-      # ---------------------------------------------------------------------------------
-      - name: Deploy to Kubernetes
-        uses: ./.github/actions/deploy
-        with:
-          environment-id: ${{ env.ENVIRONMENT_ID }}
-          namespace: ${{ env.NAMESPACE }}
+      #------------------------------------------------------------------------
+      # use kubectl, which was installed and configured in the previous step, 
+      # to verify that we have a "querium-swapi" namespace in the Kubernetes
+      # cluster.
+      #------------------------------------------------------------------------
+      - name: Create k8s namespace
+        shell: bash
+        run: |
+          kubectl create namespace querium-swapi --dry-run=client -o yaml | kubectl apply -f -
+       
+      #------------------------------------------------------------------------
+      # use kubectl to apply the manifests for this environment.
+      #------------------------------------------------------------------------
+    - name: Apply Kubernetes manifests
+      shell: bash
+      run:  |-
+        kubectl apply -f "ci/deploy/environments/${{ inputs.environment-id }}/k8s"
