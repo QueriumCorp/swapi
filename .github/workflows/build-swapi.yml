@@ -26,14 +26,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3.0.2
 
-      - name: Set up Docker Buildx
-        id: setup-docker
-        uses: docker/setup-buildx-action@v2
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1.5.1
-
       # AWS helper method. creates a session token that's usable by all other
       # aws-actions. Prevents us from having to explicitly provide authentication credentials
       # to each aws-actions method individually.
@@ -43,6 +35,14 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
+
+      - name: Set up Docker Buildx
+        id: setup-docker
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1.5.1
 
       #------------------------------------------------------------------------
       # Initialize our Ubuntu environment using a common Action stored in this
