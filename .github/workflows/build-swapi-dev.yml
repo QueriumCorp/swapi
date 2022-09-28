@@ -21,12 +21,18 @@ jobs:
       ENVIRONMENT_ID: dev
       REPOSITORY: querium/swapi-dev
     steps:
+      # checkout github all repos for this workflow: this repo, plus, 
+      # all Gihubs Actions repos in this workflow. 
+      # this is written and maintained by Github
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+
       - name: Where are we?
         id: where-are-we
         shell: bash
         run: |
           ls -lha
-          
+
       #------------------------------------------------------------------------
       # Initialize our Ubuntu environment using a common Action stored in this
       # repository
