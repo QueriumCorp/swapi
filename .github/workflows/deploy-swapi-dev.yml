@@ -4,7 +4,7 @@
 #
 # usage:      build a docker container for swapi development and push to aws ecr.
 #------------------------------------------------------------------------------
-name: Deploy Querium SWAPI dev
+name: Deploy SWAPI dev
 
 on:
   workflow_dispatch:
