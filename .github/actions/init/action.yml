@@ -31,9 +31,9 @@ inputs:
     default: us-east-2
     type: string
   eks-cluster-name:
-    description: 'Example: stepwise-global-live'
+    description: 'Example: stepwisemath-global-live'
     required: false
-    default: 'stepwise-global-live'
+    default: 'stepwisemath-global-live'
     type: string
 
 
