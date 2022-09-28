@@ -9,6 +9,9 @@
 #
 # requires:     * note that the stepwise bastion server satisfies all requirements
 #               - aws cli + AWS IAM key pair with sufficient privileges
+#               - docker ce
+#               - docker compose
+#               - Github account permissions to clone https://github.com/QueriumCorp/swapi
 #               
 #------------------------------------------------------------------------------
 GITHUB_PAT="SET-ME-PLEASE"          # see: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token

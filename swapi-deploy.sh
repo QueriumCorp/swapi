@@ -7,6 +7,9 @@
 # requires:     * note that the stepwise bastion server satisfies all requirements
 #               - fully configured kubectl with an IAM username that has 
 #                 been added to the Kubernetes cluster.
+#               - aws-auth access to stepwisemath-global-live Kubernetes cluster
+#               - ability to write to AWS Route53 resources
+#               - an existing AWS Route53 hosted zone, linked to querium.com
 #
 # see:          https://github.com/StepwiseMath/openedx_devops#v-add-more-kubernetes-admins
 #------------------------------------------------------------------------------
