@@ -74,9 +74,9 @@ runs:
     # this is written and maintained by Lawrence McDaniel + the Open edX devops community
     - name: Initialize environment
       uses: openedx-actions/tutor-k8s-init@v1.0.4
-      with:
-        eks-cluster-name: ${{ inputs.eks-cluster-name }}
-        aws-region: ${{ inputs.aws-region }}
+    #  with:
+    #    eks-cluster-name: ${{ inputs.eks-cluster-name }}
+    #    aws-region: ${{ inputs.aws-region }}
 
     - name: Create k8s namespace if it does not exist
       id: create-namespace
