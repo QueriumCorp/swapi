@@ -21,6 +21,12 @@ jobs:
       ENVIRONMENT_ID: dev
       REPOSITORY: querium/swapi-dev
     steps:
+      - name: Where are we?
+        id: where-are-we
+        shell: bash
+        run: |
+          ls -lha
+          
       #------------------------------------------------------------------------
       # Initialize our Ubuntu environment using a common Action stored in this
       # repository
