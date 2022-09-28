@@ -4,6 +4,18 @@ Swapi now runs on Kubernetes. This involves a simple 2-step process on the devel
 
 ![Github Actions](/doc/github-actions-swapi.png?raw=true "Github Actions")
 
+## Environment Variables
+
+This code base depends on the following environment variables which can be set either on the command line at run-time, or via a .env file, or via the Kubernetes deployment manifest. each of these does the same thing to the same effect.
+
+| Variable          |  Example                                                                                     |
+|-------------------|----------------------------------------------------------------------------------------------|
+| SWAPI_ENVIRONMENT | prod                                                                                         |
+| SWAPI_HOST        | qq-stepwise-api.querium.com                                                                  |
+| SWAPI_POLICY      | "$A8$"                                                                                       |
+| SWAPI_SWSERVER    | https://stepwise00.querium.com/webMathematica/api/                                           |
+| SWAPI_AISERVERS   | '[{"name":"ai00","url":"https://stepwiseai00.querium.com/webMathematica/api/","power":1}]'   |
+| SWAPI_LOGFILE     | '/home/ubuntu/.pm2/logs/swapi_log.json'                                                      |
 
 ## Build
 
@@ -25,7 +37,7 @@ The Github Actions Deploy workflow will deploy the latest Swapi build to the [st
 
 1. initializes the Github Actions runner (see details below)
 2. if necessary, creates a "querium-swapi" namespace in the Kubernetes cluster
-3. runs the Kubernetes manifests located [here, in this repository](ci/deploy/environments/dev/k8s/). Kubernetes manifests are written in yaml and are generally intuitive to read and edit.
+3. runs the Kubernetes manifests located [here, in this repository](ci/deploy/environments/aktiv/k8s/). Kubernetes manifests are written in yaml and are generally intuitive to read and edit.
 
 Note that there is an alternative bash script implementation of this same procedure, [located here](swapi-deploy.sh) that you can run from the stepwise bastion command line.
 
@@ -48,8 +60,6 @@ Github Actions is a mostly-free devops and CI automation service. It uses "runne
 - the state of the runner is wiped clean upon workflow completion, hence the ephemeral nature of Github Actions.
 
 
-## Deploy to Heroku
-
-    Deprecated? 
+## DEPRECATED: Deploy to Heroku
 
     git push heroku master

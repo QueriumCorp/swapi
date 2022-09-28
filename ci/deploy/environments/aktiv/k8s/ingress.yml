@@ -4,18 +4,18 @@
 #
 # date:       Sep-2022
 #
-# usage: setup nginx for EKS load balancer.
-#        see https://cert-manager.io/docs/
+# usage:      setup nginx for EKS load balancer for this deployment
+#             see https://cert-manager.io/docs/
 #------------------------------------------------------------------------------
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: swapi-dev
+  name: swapi-aktiv
   namespace: querium-swapi
   labels:
-    app.kubernetes.io/instance: swapi-dev
-    app.kubernetes.io/name: swapi-dev
-    app: swapi-dev
+    app.kubernetes.io/instance: swapi-aktiv
+    app.kubernetes.io/name: swapi-aktiv
+    app: swapi-aktiv
   annotations:
     # base annotations: pretty much all ingresses need these.
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
@@ -24,17 +24,17 @@ metadata:
 spec:
   tls:
   - hosts:
-    - "dev.qq-stepwise-api.querium.com"
-    - "*.dev.qq-stepwise-api.querium.com"
-    secretName: wild-swapi-dev-tls
+    - "aktiv.qq-stepwise-api.querium.com"
+    - "*.aktiv.qq-stepwise-api.querium.com"
+    secretName: wild-swapi-aktiv-tls
   rules:
-  - host: dev.qq-stepwise-api.querium.com
+  - host: aktiv.qq-stepwise-api.querium.com
     http:
       paths:
       - backend:
           service:
-            name: swapi-dev
+            name: swapi-aktiv
             port:
-              number: 8080
+              number: 80
         path: /
         pathType: Prefix

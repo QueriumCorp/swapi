@@ -15,7 +15,12 @@ module.exports = fp((fastify, opts, next) => {
         url: "http://www.querium.com",
         description: "Find more info here"
       },
-      host: "qq-stepwise-api.querium.com",
+      //host: "qq-stepwise-api.querium.com",
+      // ---------------------------------------------------
+      // mcdaniel sep-2022: switch to environment variable
+      host: process.env.SWAPI_HOST,
+      // ---------------------------------------------------
+      //
       schemes: ["https", "http"],
       consumes: ["application/json"],
       produces: ["application/json"]

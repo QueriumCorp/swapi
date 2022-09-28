@@ -8,8 +8,8 @@ const fp = require("fastify-plugin");
 module.exports = fp(async function(fastify, opts) {
   fastify.decorate("convertNameToUrl", function(sessionToken) {
     // If ai servers are not defined in the env
-    if (!process.env.AISERVERS)
-      return { status: true, url: process.env.SWSERVER };
+    if (!process.env.SWAPI_AISERVERS)
+      return { status: true, url: process.env.SWAPI_SWSERVER };
 
     // Decode the JWT
     const session = fastify.jwt.decode(sessionToken);
@@ -21,7 +21,7 @@ module.exports = fp(async function(fastify, opts) {
     }
 
     // Get the url of the server name
-    const aiServerData = JSON.parse(process.env.AISERVERS);
+    const aiServerData = JSON.parse(process.env.SWAPI_AISERVERS);
     const serverInfo = aiServerData.filter(i => i.name === session.aiName);
     if (serverInfo.length < 1)
       return {

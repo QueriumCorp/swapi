@@ -1,0 +1,58 @@
+#------------------------------------------------------------------------------
+# written by:   Lawrence McDaniel
+# date:         sep-2022
+#
+# usage:        Kubernetes deployment manifest
+#------------------------------------------------------------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swapi-aktiv
+  namespace: querium-swapi
+  labels:
+    app.kubernetes.io/instance: swapi-aktiv
+    app.kubernetes.io/name: swapi-aktiv
+    app: swapi-aktiv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: swapi-aktiv
+  template:
+    metadata:
+      labels:
+        app: swapi-aktiv
+    spec:
+      containers:
+      #------------------------------------------------------------------------
+      # Swapi environment variables. These variables are referenced in the code
+      # base in the form process.env.SWAPI_HOST, and are directly searchable.
+      #------------------------------------------------------------------------
+      - env:
+        - name: SWAPI_ENVIRONMENT
+          value: aktiv
+        - name: SWAPI_HOST
+          value: aktiv.qq-stepwise-api.querium.com
+        - name: SWAPI_POLICY
+          value: "$A8$"
+        - name: SWAPI_SWSERVER
+          value: https://stepwise00.querium.com/webMathematica/api/
+        - name: SWAPI_AISERVERS
+          value: '[{"name":"ai00","url":"https://stepwiseai00.querium.com/webMathematica/api/","power":1}]'
+        - name: SWAPI_LOGFILE
+          value: '/home/ubuntu/.pm2/logs/swapi_log.json'
+        image: 320713933456.dkr.ecr.us-east-2.amazonaws.com/querium/swapi:latest
+        imagePullPolicy: Always
+        name: swapi-aktiv
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources:
+            requests:
+              memory: 2Gi
+        securityContext:
+          allowPrivilegeEscalation: false
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:

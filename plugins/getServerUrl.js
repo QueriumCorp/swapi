@@ -8,7 +8,7 @@ const fp = require("fastify-plugin");
 module.exports = fp(async function(fastify, opts) {
   fastify.decorate("getServerURL", function() {
     // If ai servers are not defined in the env
-    if (!process.env.AISERVERS)
+    if (!process.env.SWAPI_AISERVERS)
       return { name: "default", url: process.env.SWSERVER };
 
     // Select an Ai server
@@ -18,12 +18,12 @@ module.exports = fp(async function(fastify, opts) {
       fastify.log.error("Unable to pick an Ai server");
     }
 
-    return { name: "default", url: process.env.SWSERVER };
+    return { name: "default", url: process.env.SWAPI_SWSERVER };
   });
 });
 
 const pickAiServer = () => {
-  const aiServerData = JSON.parse(process.env.AISERVERS);
+  const aiServerData = JSON.parse(process.env.SWAPI_AISERVERS);
 
   // Randomly pick an Ai servere from available servers in the env
   // NOTE: the value (integer) of the "power" field indicates the capability of

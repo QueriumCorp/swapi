@@ -4,7 +4,7 @@
 #
 # usage:      build a docker container for swapi development and push to aws ecr.
 #------------------------------------------------------------------------------
-name: Deploy dev environment
+name: Deploy aktiv
 
 on:
   workflow_dispatch:
@@ -20,7 +20,7 @@ jobs:
     env:
       AWS_REGION: us-east-2
       NAMESPACE: querium-swapi
-      ENVIRONMENT_ID: dev
+      ENVIRONMENT_ID: aktiv
 
     # deployment workflow begins here
     # --------------------------------------------

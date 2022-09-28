@@ -4,7 +4,7 @@
 #
 # date:            sep-2022
 #
-# usage:           build SWAPI dev container
+# usage:           build SWAPI container
 #
 # see: https://medium.com/@pedro.schleder/use-docker-to-develop-a-node-js-app-part-1-b1b009008425
 # -----------------------------------------------------------------------------
@@ -37,7 +37,7 @@ RUN mkdir /home/ubuntu \
 COPY . .
 
 # Expose the port we want to use
-EXPOSE 8080
+EXPOSE 80
 
 # Tell Docker to run server.js when the container is deployed to k8s
 CMD [ "node", "server.js" ]
