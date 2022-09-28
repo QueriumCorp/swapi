@@ -60,8 +60,6 @@ Github Actions is a mostly-free devops and CI automation service. It uses "runne
 - the state of the runner is wiped clean upon workflow completion, hence the ephemeral nature of Github Actions.
 
 
-## Deploy to Heroku
-
-    Deprecated? 
+## DEPRECATED: Deploy to Heroku
 
     git push heroku master
