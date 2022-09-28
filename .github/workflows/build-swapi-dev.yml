@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       AWS_REGION: us-east-2
-      REPOSITORY: querium/swapi-dev
+      REPOSITORY: querium/swapi
     steps:
       # checkout github all repos for this workflow: this repo, plus, 
       # all Gihubs Actions repos in this workflow. 
