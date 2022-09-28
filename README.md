@@ -4,6 +4,18 @@ Swapi now runs on Kubernetes. This involves a simple 2-step process on the devel
 
 ![Github Actions](/doc/github-actions-swapi.png?raw=true "Github Actions")
 
+## Environment Variables
+
+This code base depends on the following environment variables which can be set either on the command line at run-time, or via a .env file, or via the Kubernetes deployment manifest. each of these does the same thing to the same effect.
+
+| Variable          |  Example                                                                                     |
+|-------------------|----------------------------------------------------------------------------------------------|
+| SWAPI_ENVIRONMENT | prod                                                                                         |
+| SWAPI_HOST        | qq-stepwise-api.querium.com                                                                  |
+| SWAPI_POLICY      | "$A8$"                                                                                       |
+| SWAPI_SWSERVER    | https://stepwise00.querium.com/webMathematica/api/                                           |
+| SWAPI_AISERVERS   | '[{"name":"ai00","url":"https://stepwiseai00.querium.com/webMathematica/api/","power":1}]'   |
+| SWAPI_LOGFILE     | '/home/ubuntu/.pm2/logs/swapi_log.json'                                                      |
 
 ## Build
 
