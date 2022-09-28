@@ -21,11 +21,6 @@ jobs:
       ENVIRONMENT_ID: dev
       REPOSITORY: querium/swapi-dev
     steps:
-      - name: Intialize AWS ECR repo URIs
-        shell: bash
-        run: |-
-          echo "CONTAINER_NAME=${AWS_ECR_URI}/querium/swapi-${{ env.ENVIRONMENT_ID }}" >> $GITHUB_ENV
-
       #------------------------------------------------------------------------
       # Initialize our Ubuntu environment using a common Action stored in this
       # repository
