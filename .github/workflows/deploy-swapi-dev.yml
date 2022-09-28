@@ -68,4 +68,4 @@ jobs:
       - name: Apply Kubernetes manifests
         shell: bash
         run:  |-
-          kubectl apply -f "ci/deploy/environments/${{ inputs.environment-id }}/k8s"
+          kubectl apply -f "ci/deploy/environments/${{ env.ENVIRONMENT_ID }}/k8s"
