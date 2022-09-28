@@ -1,6 +1,9 @@
-# Kubernetes Deployment Manifests
+# Deployment Environments
 
+Follow these general guidelines to create and configure a new Swapi environment.
 ## Required manifests
+
+*These are located in the k8s folder inside of each deployment environment.*
 
 - **certificate.yml**: creates and manages the ssl/tls certificate for the sub-domain
 - **cluster-issuer.yml**: maps Letsencrypt service to the AWS Hosted Zone for the sub-domain
@@ -13,7 +16,7 @@
 - **horizontal-pod-autoscaler.yml**: defines the parameters for horizontal scaling of the Kubernets service
 - **vertical-pod-autoscaler.yml**: defines the parameters for vertical scaling of the individual pods.
 
-## Checklist for creating a new environment
+## Checklist for creating a new deployment environment
 
 - create an AWS Route53 Hosted Zone in the Stepwise Math AWS account
 - add an NS record in the Querium AWS Route53 querium.com hosted zone
