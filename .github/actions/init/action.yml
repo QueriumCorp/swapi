@@ -22,16 +22,13 @@ inputs:
     required: false
     default: us-east-2
     type: string
-  k8s-namespace:
-    description: 'Example: querium-swapi'
-    required: false
-    default: 'querium-swapi'
-    type: string
   eks-cluster-name:
-    description: 'Example: stepwise-global-live'
+    description: 'Example: stepwisemath-global-live'
     required: false
-    default: 'stepwise-global-live'
+    default: 'stepwisemath-global-live'
     type: string
+
+
 runs:
   using: "composite"
   steps:
@@ -40,17 +37,6 @@ runs:
     # this is written and maintained by Github
     - name: Checkout
       uses: actions/checkout@v3.0.2
-
-    # AWS helper method. creates a session token that's usable by all other
-    # aws-actions. Prevents us from having to explicitly provide authentication credentials
-    # to each aws-actions method individually.
-    # This is written and maintained by AWS.
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1.7.0
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ inputs.aws-region }}
 
     # Setup a connection to our AWS Elastic Container Registry so that we can pull
     # containers that we created with the build workflows in this Cookiecutter.
@@ -67,9 +53,3 @@ runs:
       with:
         eks-cluster-name: ${{ inputs.eks-cluster-name }}
         aws-region: ${{ inputs.aws-region }}
-
-    - name: Create k8s namespace if it does not exist
-      id: create-namespace
-      shell: bash
-      run: |-
-        kubectl create namespace ${{ inputs.eks-cluster-name }} --dry-run=client -o yaml | kubectl apply -f -
