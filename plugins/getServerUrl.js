@@ -9,7 +9,7 @@ module.exports = fp(async function(fastify, opts) {
   fastify.decorate("getServerURL", function() {
     // If ai servers are not defined in the env
     if (!process.env.SWAPI_AISERVERS)
-      return { name: "default", url: process.env.SWSERVER };
+      return { name: "default", url: process.env.SWAPI_SWSERVER };
 
     // Select an Ai server
     try {

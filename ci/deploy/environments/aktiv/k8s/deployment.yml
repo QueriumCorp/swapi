@@ -25,6 +25,8 @@ spec:
       # base in the form process.env.SWAPI_HOST, and are directly searchable.
       #------------------------------------------------------------------------
       - env:
+        - name: SWAPI_PORT
+          value: 8000
         - name: SWAPI_ENVIRONMENT
           value: aktiv
         - name: SWAPI_HOST

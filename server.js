@@ -40,7 +40,7 @@ app.addHook("onClose", async (instance, done) => {
 });
 
 // Start listening.
-app.listen(process.env.PORT || 3000, err => {
+app.listen(process.env.SWAPI_PORT || 3000, err => {
   if (err) {
     app.log.error(err);
     process.exit(1);
