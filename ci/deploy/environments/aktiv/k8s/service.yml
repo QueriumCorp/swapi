@@ -9,20 +9,11 @@ kind: Service
 metadata:
   name: swapi-aktiv
   namespace: querium-swapi
-  labels:
-    app.kubernetes.io/instance: swapi-aktiv
-    app.kubernetes.io/name: swapi-aktiv
-    app: swapi-aktiv
 spec:
-  internalTrafficPolicy: Cluster
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
+  type: ClusterIP
   ports:
   - port: 8000
     protocol: TCP
     targetPort: 8000
   selector:
     app: swapi-aktiv
-  sessionAffinity: None
-  type: ClusterIP

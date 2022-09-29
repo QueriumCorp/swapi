@@ -9,10 +9,6 @@ kind: Deployment
 metadata:
   name: swapi-aktiv
   namespace: querium-swapi
-  labels:
-    app.kubernetes.io/instance: swapi-aktiv
-    app.kubernetes.io/name: swapi-aktiv
-    app: swapi-aktiv
 spec:
   replicas: 1
   selector:

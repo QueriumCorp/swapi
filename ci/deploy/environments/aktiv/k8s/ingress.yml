@@ -12,10 +12,6 @@ kind: Ingress
 metadata:
   name: swapi-aktiv
   namespace: querium-swapi
-  labels:
-    app.kubernetes.io/instance: swapi-aktiv
-    app.kubernetes.io/name: swapi-aktiv
-    app: swapi-aktiv
   annotations:
     # base annotations: pretty much all ingresses need these.
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
