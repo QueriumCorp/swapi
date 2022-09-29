@@ -10,6 +10,7 @@ This code base depends on the following environment variables which can be set e
 
 | Variable          |  Example                                                                                     |
 |-------------------|----------------------------------------------------------------------------------------------|
+| SWAPI_PORT        | 8000                                                                                         |
 | SWAPI_ENVIRONMENT | prod                                                                                         |
 | SWAPI_HOST        | qq-stepwise-api.querium.com                                                                  |
 | SWAPI_POLICY      | "$A8$"                                                                                       |
