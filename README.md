@@ -8,9 +8,9 @@ Swapi now runs on Kubernetes. This involves a simple 2-step process on the devel
 
 This code base depends on the following environment variables which can be set either on the command line at run-time, or via a .env file, or via the Kubernetes deployment manifest. each of these does the same thing to the same effect.
 
-| Variable          |  Example                                                                                     |
+| Variable          | Example                                                                                      |
 |-------------------|----------------------------------------------------------------------------------------------|
-| SWAPI_PORT        | 8000                                                                                         |
+| SWAPI_PORT        | "8000"                                                                                       |
 | SWAPI_ENVIRONMENT | prod                                                                                         |
 | SWAPI_HOST        | qq-stepwise-api.querium.com                                                                  |
 | SWAPI_POLICY      | "$A8$"                                                                                       |
