@@ -84,8 +84,6 @@ Orginally designed internally by Google but since open-sourced, [Kubernetes](htt
 - **Service**: an external interface to a logical set of Pods. Services use a ‘virtual IP address’ local to the cluster, external services would have no way to access these IP addresses without an Ingress.
 - **Service Account**: provides an identity to your Pods, which can then be used to authenticate pods to the Kubernetes API server, allowing the pods to read and manipulate Kubernetes API objects. For example, a CI/CD pipeline that deploys applications to your cluster.
 
-Further reading: [Kubernetes Ingress with NGINX Ingress Controller Example](https://spacelift.io/blog/kubernetes-ingress).
-
 ## DEPRECATED: Deploy to Heroku
 
     git push heroku master
