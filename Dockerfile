@@ -12,7 +12,9 @@
 # We are using node's image as base for this one
 FROM node:16
 
-# add any apt packages 
+# add any apt packages
+# mcdaniel sep-2022: including curl in the container so that we have a way to 
+# trouble shoot swapi from inside the pod shell in k8s.
 RUN apt update && apt install curl
 
 # Create the app directory

@@ -40,9 +40,14 @@ app.addHook("onClose", async (instance, done) => {
 });
 
 // Start listening.
-app.listen(process.env.SWAPI_PORT || 3000, err => {
-  if (err) {
-    app.log.error(err);
-    process.exit(1);
-  }
+//app.listen(process.env.SWAPI_PORT || 3000, err => {
+//  if (err) {
+//    app.log.error(err);
+//    process.exit(1);
+//  }
+//});
+
+const HOST = '0.0.0.0';
+app.listen(process.env.SWAPI_PORT, HOST, () => {
+console.log(`Running on http://${HOST}:${PORT}`);
 });
