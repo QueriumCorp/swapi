@@ -41,6 +41,8 @@ The Github Actions Deploy workflow will deploy the latest Swapi build to the [st
 
 Note that there is an alternative bash script implementation of this same procedure, [located here](swapi-deploy.sh) that you can run from the stepwise bastion command line.
 
+![kubernetes deployment](/doc/kubernetes-flow-diagram.png?raw=true "kubernetes deployment")
+
 The stepwise bastion server is the most convenient environment to view the state of the Kubernetes cluster. This small AWS EC2 Ubuntu instance is automatically configured with all necessary software and credentials, and it includes "getting started" help in the login banner. If that's still not enough for your needs then contact Lawrence McDaniel (lawrence@querium.com).
 
 ![k9s swapi](/doc/k9s-swapi.png?raw=true "k9s swapi")
