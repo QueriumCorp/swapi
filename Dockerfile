@@ -36,8 +36,10 @@ RUN mkdir /home/ubuntu \
 # not copying all of the dev and ci files into the container.
 COPY . .
 
-# Expose the port we want to use
-EXPOSE 80
+# mcdaniel sep-2022: the Dockerfiles from tutor for e-commerce, mfe, lms
+# all export port 8000. assuming that the k8s service will need to
+# map some non-trivial service port number to this number 8000.
+EXPOSE 8000
 
 # Tell Docker to run server.js when the container is deployed to k8s
 CMD [ "node", "server.js" ]

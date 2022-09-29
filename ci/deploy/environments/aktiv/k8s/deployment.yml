@@ -45,7 +45,7 @@ spec:
         imagePullPolicy: Always
         name: swapi-aktiv
         ports:
-        - containerPort: 80
+        - containerPort: 8000
           protocol: TCP
         resources:
             requests:
