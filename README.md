@@ -63,7 +63,7 @@ Github Actions is a mostly-free devops and CI automation service. It uses "runne
 
 ## Kubernetes Cheat Sheet
 
-Orginally designed internally by Google but since open-sourced, [Kubernetes](https://kubernetes.io/) is an open-source container orchestration system for automating software deployment, scaling, and management.
+Orginally designed internally by Google but since open-sourced, [Kubernetes](https://kubernetes.io/) is an open-source container orchestration system for automating software deployment, scaling, and management. The following Kubernetes terms are prone to appear sporadically in comments throughout this repo as well as more informally during conversations with [Lawrence McDaniel](https://lawrencemcdaniel.com/) :)
 
 - **Ingress Controller**: receives all of the http request traffic from one external load balancer and then routes each request to an ingress. Ingress controllers are a type of Kubernetes LoadBalancer that eliminate the need to implement an actual external load balancer (aproximately $15 usd per month) per service, which would become pretty expensive pretty quickly. Ingress controllers are not part of the default Kubernetes installation. One has to install and configure this separately. stepwisemath-global-live uses the [NGINX Ingress Controller for Kubernetes](https://www.nginx.com/products/nginx-ingress-controller/), but there are many alternatives from which to choose.
 - **Ingress**: An API object that manages external access to the services in a cluster, typically HTTP. Ingress may provide load balancing, SSL termination and name-based virtual hosting. Traffic routing is defined by rules specified on the Ingress resource.
