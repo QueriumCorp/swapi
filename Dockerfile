@@ -13,7 +13,7 @@
 FROM node:16
 
 # add any apt packages 
-RUN sudo apt update && sudo apt install curl
+RUN apt update && apt install curl
 
 # Create the app directory
 WORKDIR /usr/src/app
