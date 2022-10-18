@@ -42,7 +42,7 @@ jobs:
 
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1.5.1
+        uses: aws-actions/amazon-ecr-login@v1.5.2
 
       #------------------------------------------------------------------------
       # Initialize our Ubuntu environment using a common Action stored in this
