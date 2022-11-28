@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 const schema = require("./schema");
 const { createQueryString, parseResponse } = require("./utils");
 
-module.exports = async function(fastify, opts) {
+module.exports = async function (fastify, opts) {
   fastify.route({
     method: "POST",
     url: "/",
@@ -47,6 +47,15 @@ module.exports = async function(fastify, opts) {
       // Sanitize the response for our protection
       let data = await response.text();
       const cleansed = fastify.cleanResponse(data);
+
+      // Validate if the request is completed in time
+      if (!fastify.didCompleteInTime(cleansed)) {
+        const error = new Error(
+          "The system has timed out; please retry the question in 5 minutes");
+        error.status = 504;
+        return error;
+      }
+
       const result = parseResponse(cleansed);
       // Check for a bad response from qEval
       if (!result.success) {

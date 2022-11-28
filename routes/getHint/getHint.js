@@ -68,6 +68,14 @@ module.exports = async function (fastify, opts) {
       // Sanitize the response for our protection
       const cleansed = fastify.cleanResponse(data);
 
+      // Validate if the request is completed in time
+      if (!fastify.didCompleteInTime(cleansed)) {
+        const error = new Error(
+          "The system has timed out; please retry the question in 5 minutes");
+        error.status = 504;
+        return error;
+      }
+
       const result = parseResponse(cleansed);
 
       // Check for a bad response from qEval

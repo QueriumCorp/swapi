@@ -51,6 +51,14 @@ module.exports = async function (fastify, opts) {
       let data = await response.text();
       const result = fastify.cleanResponse(data);
 
+      // Validate if the request is completed in time
+      if (!fastify.didCompleteInTime(result)) {
+        const error = new Error(
+          "The system has timed out; please retry the question in 5 minutes");
+        error.status = 504;
+        return error;
+      }
+
       // Get the mathML, identifiers and operators
       const mathML = getMathML(result);
       const ids = getIdentifiers(result);
