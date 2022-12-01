@@ -1,26 +1,6 @@
-"use strict";
+'use strict'
 
-const fp = require("fastify-plugin");
-
-// the use of fastify-plugin is required to be able
-// to export the decorators to the outer scope
-
-module.exports = fp(async function (fastify, opts) {
-  fastify.decorate("getServerURL", function () {
-    // If ai servers are not defined in the env
-    if (!process.env.AISERVERS)
-      return { name: "default", url: process.env.SWSERVER };
-
-    // Select an Ai server
-    try {
-      return pickAiServer();
-    } catch (error) {
-      fastify.log.error("Unable to pick an Ai server");
-    }
-
-    return { name: "default", url: process.env.SWSERVER };
-  });
-});
+require("dotenv").config();
 
 const pickAiServer = () => {
   const aiServerData = JSON.parse(process.env.AISERVERS);
@@ -46,6 +26,7 @@ const pickAiServer = () => {
       return Array(powerVal).fill(idx);
     })
     .flat();
+  // console.log(indices)
   const idxServer = Math.floor(Math.random() * indices.length);
 
   // Select an AI server based on the randomly selected index
@@ -53,3 +34,13 @@ const pickAiServer = () => {
 
   return { name: pickedServer.name, url: pickedServer.url };
 };
+
+// console.log(aiServer);
+console.log("TESTING");
+console.log(process.env.AISERVERS);
+for (let i = 0; i < 500; i++) {
+  const aiServer = pickAiServer();
+  if (aiServer.name !== "ai04") {
+    console.log("Error: " + aiServer.name);
+  }
+}
