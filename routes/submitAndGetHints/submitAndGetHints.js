@@ -61,6 +61,15 @@ module.exports = async function (fastify, opts) {
       let data = await response.text();
 
       const cleansed = fastify.cleanResponse(data);
+
+      // Validate if the request is completed in time
+      if (!fastify.didCompleteInTime(cleansed)) {
+        const error = new Error(
+          "The system has timed out; please retry the question in 5 minutes");
+        error.status = 504;
+        return error;
+      }
+
       const resultStep = parseResponseSubmitStep(cleansed);
 
       if (resultStep.stepStatus !== "INVALID") {
