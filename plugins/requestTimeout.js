@@ -13,35 +13,40 @@ const hasTimeoutError = (text) => {
   return idx > 0;
 };
 
-const processTimeoutError = (text) => {
-  const textAlt = he.decode(text);
-  let rslt = {
-    isTimeoutError: false,
-    type: null, msg: textAlt, waitTime: -1, correctStepQ: null, feedback: ""
-  };
-
-  if (!hasTimeoutError(textAlt)) {
-    return rslt;
-  }
-
-  rslt.isTimeoutError = true;
-  const tagStart = "[ERROR:START]";
-  const tagEnd = "[ERROR:END]";
-  const idxStart = textAlt.lastIndexOf(tagStart);
-  const idxEnd = textAlt.lastIndexOf(tagEnd);
-  const jsonText = textAlt.slice(idxStart + tagStart.length, idxEnd);
-  try {
-    return { ...rslt, ...JSON.parse(jsonText) };
-  } catch (e) {
-    // console.log("INVALID: timeout response");
-    return rslt;
-  }
-};
-
 module.exports = fp(async function (fastify, opts) {
   fastify.decorate("didCompleteInTime", function (rspns) {
-    return processTimeoutError(rspns);
+    console.log("rspns");
+    console.log(rspns);
+    let rslt = {
+      isTimeoutError: false,
+      type: null, msg: rspns, waitTime: -1, correctStepQ: null, feedback: "",
+      jsonMsg: ""
+    };
+
+    if (!hasTimeoutError(rspns)) {
+      return rslt;
+    }
+
+    rslt.isTimeoutError = true;
+    const tagStart = "[ERROR:START]";
+    const tagEnd = "[ERROR:END]";
+    const idxStart = rspns.indexOf(tagStart);
+    const idxEnd = rspns.indexOf(tagEnd);
+    if (idxStart < 0 || idxEnd < 0 || idxEnd < idxStart) {
+      fastify.log.error("Invalid timeout tags in the response");
+      fastify.log.error(rspns);
+      return rslt;
+    }
+
+    const jsonText = rspns.slice(idxStart + tagStart.length, idxEnd);
+    try {
+      return { jsonStr: jsonText, ...rslt, ...JSON.parse(jsonText) };
+    } catch (e) {
+      fastify.log.error("Unable to parse the json in the timeout response");
+      fastify.log.error(jsonText);
+      return rslt;
+    }
   });
 });
 
-module.exports = { processTimeoutError };
+// module.exports = { processTimeoutError };
