@@ -49,10 +49,11 @@ module.exports = async function (fastify, opts) {
       const cleansed = fastify.cleanResponse(data);
 
       // Validate if the request is completed in time
-      if (!fastify.didCompleteInTime(cleansed)) {
-        const error = new Error(
-          "The system has timed out; please retry the question in 5 minutes");
+      const rspnsTimeout = fastify.didCompleteInTime(cleansed);
+      if (rspnsTimeout.isTimeoutError) {
+        const error = new Error(rspnsTimeout.type);
         error.status = 504;
+        error.message = rspnsTimeout.jsonStr;
         return error;
       }
 
