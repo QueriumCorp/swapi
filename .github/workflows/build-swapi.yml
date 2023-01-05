@@ -24,7 +24,7 @@ jobs:
       # all Gihubs Actions repos in this workflow. 
       # this is written and maintained by Github
       - name: Checkout
-        uses: actions/checkout@v3.2.0
+        uses: actions/checkout@v3.3.0
 
       # AWS helper method. creates a session token that's usable by all other
       # aws-actions. Prevents us from having to explicitly provide authentication credentials
