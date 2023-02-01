@@ -19,4 +19,5 @@ spec:
     name: aktiv.qq-stepwise-api.querium.com
   commonName: aktiv.qq-stepwise-api.querium.com
   dnsNames:
+    - "aktiv.qq-stepwise-api.querium.com"
     - "*.aktiv.qq-stepwise-api.querium.com"
