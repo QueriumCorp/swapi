@@ -10,12 +10,13 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: le-crt
+  name: aktiv.qq-stepwise-api.querium.com
+  namespace: querium-swapi
 spec:
-  secretName: wild-swapi-aktiv-tls
+  secretName: aktiv.qq-stepwise-api-tls
   issuerRef:
     kind: ClusterIssuer
-    name: letsencrypt
+    name: aktiv.qq-stepwise-api.querium.com
   commonName: aktiv.qq-stepwise-api.querium.com
   dnsNames:
     - "*.aktiv.qq-stepwise-api.querium.com"

@@ -99,7 +99,7 @@ spec:
   - hosts:
     - "aktiv.qq-stepwise-api.querium.com"
     - "*.aktiv.qq-stepwise-api.querium.com"
-    secretName: wild-swapi-aktiv-tls
+    secretName: aktiv.qq-stepwise-api-tls
   rules:
   - host: aktiv.qq-stepwise-api.querium.com
     http:
