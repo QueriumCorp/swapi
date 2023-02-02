@@ -9,6 +9,7 @@ module.exports = fp(async function(fastify, opts) {
   fastify.decorate("getServerURL", function() {
     // If ai servers are not defined in the env
     if (!process.env.SWAPI_AISERVERS)
+      fastify.log.info("No SWAPI_AISERVERS in the environment");
       return { name: "default", url: process.env.SWAPI_SWSERVER };
 
     // Select an Ai server
@@ -48,5 +49,6 @@ const pickAiServer = () => {
   // Select an AI server based on the randomly selected index
   const pickedServer = aiServerData[indices[idxServer]];
 
+  fastify.log.info('picked server name:'+pickedServer.name+' url:'+pickedServer.url);
   return { name: pickedServer.name, url: pickedServer.url };
 };
