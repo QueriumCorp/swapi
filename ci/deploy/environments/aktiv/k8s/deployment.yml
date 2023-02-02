@@ -34,7 +34,7 @@ spec:
         - name: SWAPI_POLICY
           value: "$A8$"
         - name: SWAPI_SWSERVER
-          value: https://stepwise00.querium.com/webMathematica/api/
+          value: https://stepwise03.querium.com/webMathematica/api/
         - name: SWAPI_AISERVERS
           value: '[{"name":"ai00","url":"https://stepwiseai00.querium.com/webMathematica/api/","power":1}]'
         - name: SWAPI_LOGFILE
