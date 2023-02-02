@@ -24,7 +24,7 @@ module.exports = async function (fastify, opts) {
 
       // Acquire an Ai server
       const serverInfo = await fastify.getServerURL();
-      // fastify.log.info(JSON.stringify(serverInfo));
+      fastify.log.info(JSON.stringify(serverInfo));
 
       // Create the sessionCode for this session
       const { studentId, id } = request.body;
@@ -44,6 +44,7 @@ module.exports = async function (fastify, opts) {
         const error = new Error("There was an error in the StepWise Server");
         error.status = response.status;
         error.statusText = response.statusText;
+        fastify.log.info(JSON.stringify(error));
         return error;
       }
 
