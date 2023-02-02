@@ -15,7 +15,7 @@ FROM node:16
 # add any apt packages
 # mcdaniel sep-2022: including curl in the container so that we have a way to 
 # trouble shoot swapi from inside the pod shell in k8s.
-RUN apt update && apt install curl
+RUN apt update -y && apt install -y curl
 
 # Create the app directory
 WORKDIR /usr/src/app
