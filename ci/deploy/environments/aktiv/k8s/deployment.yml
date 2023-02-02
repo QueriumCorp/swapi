@@ -34,9 +34,9 @@ spec:
         - name: SWAPI_POLICY
           value: "$A8$"
         - name: SWAPI_SWSERVER
-          value: https://stepwise04.querium.com/webMathematica/api/
+          value: https://stepwiseai03.querium.com/webMathematica/api/
         - name: SWAPI_AISERVERS
-          value: '[{"name":"ai04","url":"https://stepwiseai04.querium.com/webMathematica/api/","power":1},{"name":"ai02","url":"https://stepwiseai02.querium.com/webMathematica/api/","power":0},{"name":"ai03","url":"https://stepwiseai03.querium.com/webMathematica/api/","power":0},{"name":"ai00","url":"https://stepwiseai00.querium.com/webMathematica/api/","power":0}]'
+          value: '[{"name":"ai04","url":"https://stepwiseai04.querium.com/webMathematica/api/","power":0},{"name":"ai02","url":"https://stepwiseai02.querium.com/webMathematica/api/","power":0},{"name":"ai03","url":"https://stepwiseai03.querium.com/webMathematica/api/","power":1},{"name":"ai00","url":"https://stepwiseai00.querium.com/webMathematica/api/","power":0}]'
         - name: SWAPI_LOGFILE
           value: '/home/ubuntu/.pm2/logs/swapi_log.json'
         image: 320713933456.dkr.ecr.us-east-2.amazonaws.com/querium/swapi:latest
