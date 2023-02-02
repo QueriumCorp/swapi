@@ -36,7 +36,7 @@ spec:
         - name: SWAPI_SWSERVER
           value: https://stepwise03.querium.com/webMathematica/api/
         - name: SWAPI_AISERVERS
-          value: '[{"name":"ai00","url":"https://stepwiseai00.querium.com/webMathematica/api/","power":1}]'
+          value: '[{"name":"ai03","url":"https://stepwiseai03.querium.com/webMathematica/api/","power":1}]'
         - name: SWAPI_LOGFILE
           value: '/home/ubuntu/.pm2/logs/swapi_log.json'
         image: 320713933456.dkr.ecr.us-east-2.amazonaws.com/querium/swapi:latest
