@@ -1,8 +1,8 @@
 "use strict";
 
-const fp = require("fastify-plugin");
+import fp from "fastify-plugin";
 
-module.exports = fp(async function(fastify, opts) {
+export default fp(async function(fastify, opts) {
   fastify.decorate("prepSessionInfo", function(id, studentId, aiName) {
     const rightNow = Date.now();
     return {

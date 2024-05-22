@@ -17,10 +17,12 @@ const responseSchema = {
   },
 };
 
-module.exports = {
+const schema = {
   tags: ["Heartbeat"],
   querystring: queryStringSchema,
   params: paramsSchema,
   headers: headersSchema,
   response: responseSchema,
 };
+
+export default schema;

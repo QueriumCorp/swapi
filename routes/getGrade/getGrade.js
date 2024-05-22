@@ -1,9 +1,9 @@
 "use strict";
-const fetch = require("node-fetch");
-const schema = require("./schema");
-const { createQueryString, parseResponse } = require("./utils");
+import fetch from "node-fetch";
+import schema from "./schema.js";
+import { createQueryString, parseResponse } from "./utils.js";
 
-module.exports = async function(fastify, opts) {
+export default async function (fastify, opts) {
   fastify.route({
     method: "POST",
     url: "/",
@@ -63,8 +63,8 @@ module.exports = async function(fastify, opts) {
       return {
         status: 200,
         grade: result.grade,
-        rawResponse: data
+        rawResponse: data,
       };
-    }
+    },
   });
-};
+}

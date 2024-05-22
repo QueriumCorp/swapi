@@ -1,18 +1,18 @@
 "use strict";
-const fetch = require("node-fetch");
-const schema = require("./schema");
-const {
-  createQueryString: createQueryStringSubmitStep,
-  parseResponse: parseResponseSubmitStep
-} = require("../submitStep/utils");
-const {
-  createQueryString: createQueryStringGetHint,
-  parseResponse: parseResponseGetHint,
-  handleFetch: handleFetchHint
-} = require("../getHint/utils");
-const { hintsInResponse } = require("./utils");
+import fetch from "node-fetch";
+import schema from "./schema.js";
+import {
+  createQueryString as createQueryStringSubmitStep,
+  parseResponse as parseResponseSubmitStep,
+} from "../submitStep/utils.js";
+import {
+  createQueryString as createQueryStringGetHint,
+  parseResponse as parseResponseGetHint,
+  handleFetch as handleFetchHint,
+} from "../getHint/utils.js";
+import { hintsInResponse } from "./utils.js";
 
-module.exports = async function (fastify, opts) {
+export default async function (fastify, opts) {
   fastify.route({
     method: "POST",
     url: "/",
@@ -69,11 +69,11 @@ module.exports = async function (fastify, opts) {
           stepStatus: resultStep.stepStatus,
           message: resultStep.message,
           rawResponse: data,
-          hintObject: []
+          hintObject: [],
         };
       }
 
-      // Handle the case: qEval can combine the feedback message and getGeneral 
+      // Handle the case: qEval can combine the feedback message and getGeneral
       // hints in one response on an INVALID step
       const structData = hintsInResponse(cleansed);
       if (structData.containsHintsQ) {
@@ -91,7 +91,7 @@ module.exports = async function (fastify, opts) {
           stepStatus: resultStep.stepStatus,
           message: structData.feedback,
           rawResponse: data,
-          hintObject: structData.content.hintObject
+          hintObject: structData.content.hintObject,
         };
       }
 
@@ -138,8 +138,8 @@ module.exports = async function (fastify, opts) {
         stepStatus: resultStep.stepStatus,
         message: resultStep.message,
         rawResponse: data,
-        hintObject: resultHint.hintObject
+        hintObject: resultHint.hintObject,
       };
-    }
+    },
   });
-};
+}

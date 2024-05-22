@@ -1,8 +1,9 @@
-const { default: fastify } = require("fastify");
-const fp = require("fastify-plugin");
+import { default as fastify } from "fastify";
+import fp from "fastify-plugin";
+import swaggerPkg from "@fastify/swagger"
 
-module.exports = fp((fastify, opts, next) => {
-  fastify.register(require("fastify-swagger"), {
+export default fp((fastify, opts, next) => {
+  fastify.register(swaggerPkg, {
     routePrefix: "/swagger",
     swagger: {
       info: {

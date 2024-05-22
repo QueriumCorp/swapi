@@ -1,8 +1,8 @@
 "use strict";
 
-const schema = require("./heartbeat.schema");
+import schema from "./heartbeat.schema.js";
 
-module.exports = async function (fastify, opts) {
+export default async function (fastify, opts) {
   fastify.route({
     method: "GET",
     url: "/",
@@ -15,4 +15,4 @@ module.exports = async function (fastify, opts) {
       };
     },
   });
-};
+}

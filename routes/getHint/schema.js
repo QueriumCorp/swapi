@@ -27,11 +27,11 @@ const responseSchema = {
           properties: {
             tag: {
               type: "string",
-              enum: ["HINT", "ERROR"]
+              enum: ["HINT", "ERROR"],
             },
             type: { type: "string" },
-            message: { type: "string" }
-          }
+            message: { type: "string" },
+          },
         },
       },
     },
@@ -47,7 +47,7 @@ const responseSchema = {
   },
 };
 
-module.exports = {
+const schema = {
   tags: ["Get Hint"],
   body: bodySchema,
   querystring: queryStringSchema,
@@ -55,3 +55,5 @@ module.exports = {
   headers: headersSchema,
   response: responseSchema,
 };
+
+export default schema;

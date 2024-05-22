@@ -1,12 +1,13 @@
 "use strict";
 
-const fp = require("fastify-plugin");
-const he = require("he");
+import fp from "fastify-plugin";
+import hePkg from "he";
+const {decode} = hePkg;
 
-module.exports = fp(async function (fastify, opts) {
+export default fp(async function (fastify, opts) {
   fastify.decorate("cleanResponse", function (dirty) {
     var resultStart = dirty.indexOf("<result>") + 8;
     var resultEnd = dirty.indexOf("</result>") - 8;
-    return he.decode(dirty.slice(resultStart, resultEnd));
+    return decode(dirty.slice(resultStart, resultEnd));
   });
 });

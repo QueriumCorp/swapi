@@ -1,13 +1,13 @@
 "use strict";
 
 // Read the .env file.
-require("dotenv").config();
+import 'dotenv/config'
 
 // Require the framework
-const Fastify = require("fastify");
+import Fastify from "fastify";
 
 // Require library to exit fastify process, gracefully (if possible)
-const closeWithGrace = require("close-with-grace");
+import closeWithGrace from "close-with-grace";
 
 // Instantiate Fastify with some config
 const app = Fastify({
@@ -19,7 +19,7 @@ const app = Fastify({
 });
 
 // Register your application as a normal plugin.
-const appService = require("./app.js");
+import appService from "./app.js";
 app.register(appService);
 
 // delay is the number of milliseconds for the graceful close to finish

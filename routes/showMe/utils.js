@@ -1,5 +1,3 @@
-const he = require("he");
-
 const createQueryString = function (request, sessionCode) {
   // Warning: qEval does case-sensitive replacement of percent escapes,
   // and expects lower case letters e.g. %2b NOT %2B
@@ -64,7 +62,4 @@ const parseResponse = function (response) {
   };
 };
 
-module.exports = {
-  createQueryString,
-  parseResponse,
-};
+export { createQueryString, parseResponse };

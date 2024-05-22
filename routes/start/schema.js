@@ -44,7 +44,7 @@ const responseSchema = {
   },
 };
 
-module.exports = {
+const schema = {
   tags: ["Start Session"],
   body: bodySchema,
   querystring: queryStringSchema,
@@ -52,3 +52,5 @@ module.exports = {
   headers: headersSchema,
   response: responseSchema,
 };
+
+export default schema;

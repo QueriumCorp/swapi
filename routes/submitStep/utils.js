@@ -62,10 +62,7 @@ function parseResponse(response) {
   };
 }
 
-module.exports = {
-  createQueryString,
-  parseResponse,
-};
+export { createQueryString, parseResponse };
 
 const cleanUpStep = function (step) {
   if (step.indexOf("MathML") > -1) {

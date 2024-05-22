@@ -1,15 +1,7 @@
 "use strict";
-const fetch = require("node-fetch");
-const schema = require("./schema");
-const {
-  cleanResponse,
-  getMathML,
-  getIdentifiers,
-  getOperators,
-  createQueryString
-} = require("./utils");
+import schema from "./schema.js";
 
-module.exports = async function(fastify, opts) {
+export default async function (fastify, opts) {
   fastify.route({
     method: "POST",
     url: "/",
@@ -68,6 +60,6 @@ module.exports = async function(fastify, opts) {
       //   identifiers: ids,
       //   operators: ops,
       // };
-    }
+    },
   });
-};
+}

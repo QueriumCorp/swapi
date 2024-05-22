@@ -8,8 +8,8 @@ const bodySchema = {
   properties: {
     appKey: { type: "string" },
     sessionToken: { type: "string" },
-    step: { type: "string" }
-  }
+    step: { type: "string" },
+  },
 };
 
 const queryStringSchema = {};
@@ -22,7 +22,7 @@ const responseSchema = {
       status: { type: "string" },
       stepStatus: {
         type: "string",
-        enum: ["VALID", "INVALID", "COMPLETE", "EXPIRED", "ERROR"]
+        enum: ["VALID", "INVALID", "COMPLETE", "EXPIRED", "ERROR"],
       },
       message: { type: "string" },
       rawResponse: { type: "string" },
@@ -33,14 +33,14 @@ const responseSchema = {
           properties: {
             tag: {
               type: "string",
-              enum: ["HINT", "ERROR"]
+              enum: ["HINT", "ERROR"],
             },
             type: { type: "string" },
-            message: { type: "string" }
-          }
+            message: { type: "string" },
+          },
         },
       },
-    }
+    },
   },
   500: {
     type: "object",
@@ -48,16 +48,18 @@ const responseSchema = {
       statusCode: { type: "string" },
       error: { type: "string" },
       message: { type: "string" },
-      details: { type: "string" }
-    }
-  }
+      details: { type: "string" },
+    },
+  },
 };
 
-module.exports = {
+const schema = {
   tags: ["Submit Step"],
   body: bodySchema,
   querystring: queryStringSchema,
   params: paramsSchema,
   headers: headersSchema,
-  response: responseSchema
+  response: responseSchema,
 };
+
+export default schema;

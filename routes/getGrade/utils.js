@@ -1,5 +1,3 @@
-const he = require("he");
-
 const createQueryString = function (request, sessionCode) {
   const { appKey } = request.body;
 
@@ -20,7 +18,4 @@ function parseResponse(response) {
     grade: grade,
   };
 }
-module.exports = {
-  createQueryString,
-  parseResponse,
-};
+export { createQueryString, parseResponse };

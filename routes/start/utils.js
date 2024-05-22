@@ -1,4 +1,4 @@
-const he = require("he");
+import he from "he";
 
 const createQueryString = function (sessionCode, request) {
   // Warning: qEval does case-sensitive replacement of percent escapes,
@@ -243,7 +243,7 @@ const getOperators = function (list) {
   }
 };
 
-module.exports = {
+export {
   createQueryString,
   cleanResponse,
   getMathML,

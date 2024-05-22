@@ -1,9 +1,9 @@
 "use strict";
 
-const fp = require("fastify-plugin");
+import fp from "fastify-plugin";
 
 // Log the requests
-module.exports = fp(async function (fastify, opts) {
+export default fp(async function (fastify, opts) {
   fastify.addHook('preHandler', function (req, reply, done) {
     if (req.body) {
       req.log.info(

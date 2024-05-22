@@ -1,9 +1,9 @@
 "use strict";
 
-const fp = require("fastify-plugin");
+import fp from "fastify-plugin";
 
 // Log the responses
-module.exports = fp(async function (fastify, opts) {
+export default fp(async function (fastify, opts) {
   fastify.addHook('preSerialization', (request, reply, payload, done) => {
     if (payload) {
       request.log.info(

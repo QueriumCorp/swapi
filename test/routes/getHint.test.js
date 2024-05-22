@@ -1,7 +1,7 @@
 const utilGetHint = require("../../routes/getHint/utils");
 const utilSubmitStep = require("../../routes/submitStep/utils");
 const utilSubAndHint = require("../../routes/submitAndGetHints/utils");
-const he = require("he");
+const he = import he from "he";;
 
 const cleanRspns = (arg) => {
   var resultStart = arg.indexOf("<result>") + 8;

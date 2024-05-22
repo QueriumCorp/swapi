@@ -1,14 +1,14 @@
 "use strict";
-const fetch = require("node-fetch");
-const schema = require("./schema");
-const {
+import fetch from "node-fetch";
+import schema from "./schema.js";
+import {
   getMathML,
   getIdentifiers,
   getOperators,
-  createQueryString
-} = require("./utils");
+  createQueryString,
+} from "./utils.js";
 
-module.exports = async function (fastify, opts) {
+export default async function (fastify, opts) {
   fastify.route({
     method: "POST",
     url: "/",
@@ -63,8 +63,8 @@ module.exports = async function (fastify, opts) {
         sessionCode: sessionCode,
         mathML: mathML,
         identifiers: ids,
-        operators: ops
+        operators: ops,
       };
-    }
+    },
   });
-};
+}
