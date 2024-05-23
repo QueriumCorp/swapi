@@ -8,15 +8,16 @@ Swapi now runs on Kubernetes. This involves a simple 2-step process on the devel
 
 This code base depends on the following environment variables which can be set either on the command line at run-time, or via a .env file, or via the Kubernetes deployment manifest. each of these does the same thing to the same effect.
 
-| Variable          | Example                                                                                      |
-|-------------------|----------------------------------------------------------------------------------------------|
-| SWAPI_PORT        | "8000"                                                                                       |
-| SWAPI_ENVIRONMENT | prod                                                                                         |
-| SWAPI_HOST        | qq-stepwise-api.querium.com                                                                  |
-| SWAPI_POLICY      | "$A8$"                                                                                       |
-| SWAPI_SWSERVER    | https://stepwise00.querium.com/webMathematica/api/                                           |
-| SWAPI_AISERVERS   | '[{"name":"ai00","url":"https://stepwiseai00.querium.com/webMathematica/api/","power":1}]'   |
-| SWAPI_LOGFILE     | '/home/ubuntu/.pm2/logs/swapi_log.json'                                                      |
+| Variable          | Example                                                                                    |
+| ----------------- | ------------------------------------------------------------------------------------------ |
+| SWAPI_PORT        | "8000"                                                                                     |
+| SWAPI_ENVIRONMENT | prod                                                                                       |
+| SWAPI_HOST        | qq-stepwise-api.querium.com                                                                |
+| SWAPI_POLICY      | "$A8$"                                                                                     |
+| SWAPI_AISERVERS   | '[{"name":"ai00","url":"https://stepwiseai00.querium.com/webMathematica/api/","power":1}]' |
+| SWAPI_LOGFILE     | '/home/ubuntu/.pm2/logs/swapi_log.json'                                                    |
+| SWAPI_SWSERVER    | 'https://stepwiseai00.querium.com/webMathematica/api/'                                     |
+| VALID_APP_KEYS    | 'StepWiseAPI 101EDU JiraTestPage'                                                          |
 
 ## Build
 

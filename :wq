@@ -1,3 +1,4 @@
+---
 #------------------------------------------------------------------------------
 # written by:   Lawrence McDaniel
 # date:         sep-2022
@@ -20,36 +21,38 @@ spec:
         app: swapi-aktiv
     spec:
       containers:
-      #------------------------------------------------------------------------
-      # Swapi environment variables. These variables are referenced in the code
-      # base in the form process.env.SWAPI_HOST, and are directly searchable.
-      #------------------------------------------------------------------------
-      - env:
-        - name: SWAPI_PORT
-          value: "8000"
-        - name: SWAPI_ENVIRONMENT
-          value: aktiv
-        - name: SWAPI_HOST
-          value: aktiv.qq-stepwise-api.querium.com
-        - name: SWAPI_POLICY
-          value: "$A8$"
-        - name: SWAPI_SWSERVER
-          value: https://stepwise03.querium.com/webMathematica/api/
-        - name: SWAPI_AISERVERS
-          value: '[{"name":"ai00","url":"https://stepwiseai00.querium.com/webMathematica/api/","power":0},{"name":"ai03","url":"https://stepwiseai03.querium.com/webMathematica/api/","power":1}]'
-        - name: SWAPI_LOGFILE
-          value: '/home/ubuntu/.pm2/logs/swapi_log.json'
-        image: 320713933456.dkr.ecr.us-east-2.amazonaws.com/querium/swapi:latest
-        imagePullPolicy: Always
-        name: swapi-aktiv
-        ports:
-        - containerPort: 8000
-          protocol: TCP
-        resources:
+        #------------------------------------------------------------------------
+        # Swapi environment variables. These variables are referenced in the code
+        # base in the form process.env.SWAPI_HOST, and are directly searchable.
+        #------------------------------------------------------------------------
+        - env:
+            - name: SWAPI_PORT
+              value: "8000"
+            - name: SWAPI_ENVIRONMENT
+              value: aktiv
+            - name: SWAPI_HOST
+              value: aktiv.qq-stepwise-api.querium.com
+            - name: VALID_APP_KEYS
+              value: "StepWiseAPI 101EDU JiraTestPage"
+            - name: SWAPI_POLICY
+              value: "$A8$"
+            - name: SWAPI_SWSERVER
+              value: https://stepwise03.querium.com/webMathematica/api/
+            - name: SWAPI_AISERVERS
+              value: '[{"name":"ai00","url":"https://stepwiseai00.querium.com/webMathematica/api/","power":0},{"name":"ai03","url":"https://stepwiseai03.querium.com/webMathematica/api/","power":1}]'
+            - name: SWAPI_LOGFILE
+              value: "/home/ubuntu/.pm2/logs/swapi_log.json"
+          image: 320713933456.dkr.ecr.us-east-2.amazonaws.com/querium/swapi:latest
+          imagePullPolicy: Always
+          name: swapi-aktiv
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          resources:
             requests:
               memory: 2Gi
-        securityContext:
-          allowPrivilegeEscalation: false
+          securityContext:
+            allowPrivilegeEscalation: false
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
