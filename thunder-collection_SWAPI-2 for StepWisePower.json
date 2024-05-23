@@ -1,0 +1,219 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "SWAPI-2 for StepWisePower",
+    "collectionId": "a8614426-3c5e-40c3-b4a0-f3cb39b4d8b2",
+    "dateExported": "2024-05-23T01:41:45.456Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "ecdef402-608c-466b-bcfa-acc8f1157d4f",
+            "colId": "a8614426-3c5e-40c3-b4a0-f3cb39b4d8b2",
+            "containerId": "",
+            "name": "Heartbeat",
+            "url": "{{targetServer}}",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-05-23T01:38:51.451Z",
+            "modified": "2024-05-23T01:38:51.451Z",
+            "headers": [],
+            "tests": []
+        },
+        {
+            "_id": "d3de66d1-7244-4af5-bc3e-6723ce2c99bb",
+            "colId": "a8614426-3c5e-40c3-b4a0-f3cb39b4d8b2",
+            "containerId": "",
+            "name": "StartSession",
+            "url": "{{targetServer}}/start",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-05-23T01:38:51.452Z",
+            "modified": "2024-05-23T01:38:51.452Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\",\n  \"title\": \"Solve compound linear inequalities in 1 variable\",\n  \"definition\": \"SolveFor[ 5x+9y=16 && x+2y=4, {x,y}, SubstOrElimMethod]\",\n  \"stimulus\": \"Solve by the substitution or elimination method. Give your answer as an ordered pair \\\\(x,y\\\\).\",\n  \"topic\": \"gradeBasicAlgebra\",\n  \"hints\": []\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "set-env-var",
+                    "custom": "json.sessionToken",
+                    "action": "setto",
+                    "value": "{{session}}"
+                }
+            ]
+        },
+        {
+            "_id": "bb09c2c7-c0a2-4e4b-8207-4e4cbef6d41a",
+            "colId": "a8614426-3c5e-40c3-b4a0-f3cb39b4d8b2",
+            "containerId": "",
+            "name": "SubmitStep LaTeX",
+            "url": "{{targetServer}}/submitStep",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-05-23T01:38:51.453Z",
+            "modified": "2024-05-23T01:38:51.453Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionToken\": \"{{session}}\",\n  \"step\": \"x+2y=4\"\n}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "c28c14a6-0bdc-44a4-abbf-15319b52ef7b",
+            "colId": "a8614426-3c5e-40c3-b4a0-f3cb39b4d8b2",
+            "containerId": "",
+            "name": "GetHint",
+            "url": "{{targetServer}}/getHint",
+            "method": "POST",
+            "sortNum": 35000,
+            "created": "2024-05-23T01:38:51.454Z",
+            "modified": "2024-05-23T01:38:51.454Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionToken\": \"{{session}}\"\n}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "aa03eb38-b960-411e-85a5-655c045e9c9a",
+            "colId": "a8614426-3c5e-40c3-b4a0-f3cb39b4d8b2",
+            "containerId": "",
+            "name": "CloseSession",
+            "url": "{{targetServer}}/close",
+            "method": "POST",
+            "sortNum": 36250,
+            "created": "2024-05-23T01:38:51.455Z",
+            "modified": "2024-05-23T01:38:51.455Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionToken\": \"{{session}}\"\n}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "0fffe034-acf0-483d-90ff-d9cc7f015c65",
+            "colId": "a8614426-3c5e-40c3-b4a0-f3cb39b4d8b2",
+            "containerId": "",
+            "name": "submitComment",
+            "url": "{{targetServer}}/submitComment",
+            "method": "POST",
+            "sortNum": 36562.5,
+            "created": "2024-05-23T01:38:51.456Z",
+            "modified": "2024-05-23T01:38:51.456Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionToken\": \"{{session}}\",\n  \"comment\": \"I have insightful criticisms about this question!\"\n}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "8feff81d-bf40-4fce-a5c8-0b8d0900659e",
+            "colId": "a8614426-3c5e-40c3-b4a0-f3cb39b4d8b2",
+            "containerId": "",
+            "name": "saveTrace",
+            "url": "{{targetServer}}/saveTrace",
+            "method": "POST",
+            "sortNum": 36718.8,
+            "created": "2024-05-23T01:38:51.457Z",
+            "modified": "2024-05-23T01:38:51.457Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionToken\": \"{{session}}\",\n  \"comment\": \"I have insightful criticisms about this question!\"\n}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "a004e27d-8da5-43cf-b775-ec2d871a1617",
+            "colId": "a8614426-3c5e-40c3-b4a0-f3cb39b4d8b2",
+            "containerId": "",
+            "name": "getGrade",
+            "url": "{{targetServer}}/getGrade",
+            "method": "POST",
+            "sortNum": 36875,
+            "created": "2024-05-23T01:38:51.458Z",
+            "modified": "2024-05-23T01:38:51.458Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionToken\": \"{{session}}\"\n}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "13cbd93f-5f6a-4b48-8a52-2218f8d2ea03",
+            "colId": "a8614426-3c5e-40c3-b4a0-f3cb39b4d8b2",
+            "containerId": "",
+            "name": "ShowMe",
+            "url": "{{targetServer}}/showMe",
+            "method": "POST",
+            "sortNum": 37500,
+            "created": "2024-05-23T01:38:51.459Z",
+            "modified": "2024-05-23T01:38:51.459Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionToken\": \"{{session}}\"\n}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "02f69154-0420-4fdc-8714-7ff788046287",
+            "colId": "a8614426-3c5e-40c3-b4a0-f3cb39b4d8b2",
+            "containerId": "",
+            "name": "AssessSolution",
+            "url": "{{targetServer}}/assessSolution",
+            "method": "POST",
+            "sortNum": 38125,
+            "created": "2024-05-23T01:38:51.460Z",
+            "modified": "2024-05-23T01:38:51.460Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\"\n}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "c630b3cf-cc2e-47ba-9b75-866e6db1df8f",
+            "colId": "a8614426-3c5e-40c3-b4a0-f3cb39b4d8b2",
+            "containerId": "",
+            "name": "PrecomputeHints",
+            "url": "{{targetServer}}/precomputeHints",
+            "method": "POST",
+            "sortNum": 38750,
+            "created": "2024-05-23T01:38:51.461Z",
+            "modified": "2024-05-23T01:38:51.461Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionToken\": \"{{session}}\"\n}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "f5cfa893-5bcb-4f9e-a6ca-f00614aa767a",
+            "colId": "a8614426-3c5e-40c3-b4a0-f3cb39b4d8b2",
+            "containerId": "",
+            "name": "SubmitStep MathML",
+            "url": "{{targetServer}}/submitStep",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-05-23T01:38:51.462Z",
+            "modified": "2024-05-23T01:38:51.462Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"appKey\": \"StepWiseAPI\",\n  \"sessionCode\": \"{{session}}\",\n  \"studentId\": \"Gary Busey\",\n  \"id\": \"QUES6018\",\n  \"step\": \"<math xmlns='http://www.w3.org/1998/Math/MathML' display='block' title='x=4-2y '><mrow><mi>x</mi><mo>=</mo><mn>4</mn><mo>-</mo><mn>2</mn><mi>y</mi></mrow></math>\"\n}"
+            },
+            "tests": []
+        }
+    ],
+    "ref": "ALmU272qGSBErD30-xs5lw9YrtVaKBvG9aibEaCLjQs-8mr4J7ICMYbWJdl_avKVYH_dZs8gGIT4xjAhDOjdoA"
+}
