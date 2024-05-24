@@ -4,7 +4,7 @@
 
 const bodySchema = {
   type: "object",
-  required: ["appKey", "sessionToken", "known", "unknown"],
+  required: ["appKey", "sessionToken", "schema"],
   properties: {
     appKey: {
       description: "The unique identifier for your application",
@@ -15,21 +15,9 @@ const bodySchema = {
         "The unique identifier for this session. Typically includes a student id and timestamp",
       type: "string",
     },
-    known: {
-      description: "The known facts the student has provided",
-      type: "array",
-      items: {
-        type: "string",
-      },
-      uniqueItems: true,
-    },
-    unknown: {
-      description: "The unknown facts the student has provided",
-      type: "array",
-      items: {
-        type: "string",
-      },
-      uniqueItems: true,
+    equation: {
+      description: "The schema equation",
+      type: "string",
     },
   },
 };
@@ -62,7 +50,7 @@ const responseSchema = {
 };
 
 const schema = {
-  tags: ["Submit T Table"],
+  tags: ["Submit Organize"],
   body: bodySchema,
   querystring: queryStringSchema,
   params: paramsSchema,

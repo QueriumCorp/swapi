@@ -50,7 +50,7 @@ const responseSchema = {
 };
 
 const schema = {
-  tags: ["Submit Step"],
+  tags: ["Submit Pick Schema"],
   body: bodySchema,
   querystring: queryStringSchema,
   params: paramsSchema,
