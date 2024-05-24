@@ -1,19 +1,18 @@
 const createQueryString = function (request, sessionCode) {
   // Warning: qEval does case-sensitive replacement of percent escapes,
   // and expects lower case letters e.g. %2b NOT %2B
-  const { appKey, step } = request.body;
+  const { appKey, schema } = request.body;
 
   const appKeyPart = "?appKey=" + appKey.replace(/\s/g, "");
   const cmdPart = "&cmd=processLRV";
   const sessionCodePart = "&session=" + sessionCode;
 
   // sample step query paramter
-  //   step={"type": "json","step": "tTable","known": ["Minh spent %26dollar;6.25", "5 sticker books"],"unknown": ["Find the cost of each sticker book."]
+  //   step={"type": "json","step": "pickSchema","schema": "multiplicativeEqualGroupsSchema"}
   const stepPart =
     "&step=" +
-    `{"type": "json","step": "tTable",
-    "known": ${JSON.stringify(step.known)},
-    "unknown": ${JSON.stringify(step.unknown)}
+    `{"type": "json","step": "pickSchema",
+    "schema": ${JSON.stringify(schema)}
     }`;
 
   console.log([appKeyPart, cmdPart, sessionCodePart, stepPart].join(""));
