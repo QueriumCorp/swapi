@@ -15,10 +15,6 @@ const createQueryString = function (request, sessionCode) {
       known
     )},"unknown": ${JSON.stringify(unknown)}}`;
 
-  console.info("==============================================");
-  console.log([appKeyPart, cmdPart, sessionCodePart, stepPart].join(""));
-  console.info("==============================================");
-
   return [appKeyPart, cmdPart, sessionCodePart, stepPart].join("");
 };
 

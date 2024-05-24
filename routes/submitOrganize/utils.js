@@ -12,7 +12,7 @@ const createQueryString = function (request, sessionCode) {
   const stepPart =
     "&step=" +
     `{"type": "json","step": "pickSchema",
-    "equation": "${JSON.stringify(equation)}"
+    "equation": "${cleanUpStep(equation)}"
     }`;
 
   console.log([appKeyPart, cmdPart, sessionCodePart, stepPart].join(""));
