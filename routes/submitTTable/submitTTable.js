@@ -33,6 +33,9 @@ export default async function (fastify, opts) {
 
       const queryString = createQueryString(request, sessionCode);
       const fullURL = serverInfo.url + queryString;
+
+      console.log(fullURL);
+
       let response = await fetch(fullURL);
 
       // Check for a bad response from qEval
